@@ -4,146 +4,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        Registrar Pago
-    </title>
+    <title>Registrar Pago</title>
     <link rel="stylesheet" href="css/formularios.css">
 </head>
 
 <body>
 
     <div class="contenedor">
-        <h1>
-            Registrar Pago
-        </h1>
-        <form id="formPago">
-            <label>
-                Socio
-            </label>
-                <select id="nombreSocio" required>
-                    <option value="">
-                        Seleccione un socio
-                    </option>
-                </select>
-            <label>
-                Fecha
-            </label>
 
+        <h1>Registrar Pago</h1>
+
+        <form id="formPago">
+
+            <label>Socio</label>
+            <select id="nombreSocio" required>
+                <option value="">Seleccione un socio</option>
+            </select>
+
+            <label>Fecha</label>
             <input type="date" id="fecha" required>
 
             <label>Concepto de Pago</label>
-
             <select id="conceptoPago" required>
+                <option value="">Seleccione...</option>
 
-                <option value="">
-                    Seleccione...
-                </option>
+                <option value="Cuota Enero">Cuota Enero</option>
+                <option value="Cuota Febrero">Cuota Febrero</option>
+                <option value="Cuota Marzo">Cuota Marzo</option>
+                <option value="Cuota Abril">Cuota Abril</option>
+                <option value="Cuota Mayo">Cuota Mayo</option>
+                <option value="Cuota Junio">Cuota Junio</option>
+                <option value="Cuota Julio">Cuota Julio</option>
+                <option value="Cuota Agosto">Cuota Agosto</option>
+                <option value="Cuota Septiembre">Cuota Septiembre</option>
+                <option value="Cuota Octubre">Cuota Octubre</option>
+                <option value="Cuota Noviembre">Cuota Noviembre</option>
+                <option value="Cuota Diciembre">Cuota Diciembre</option>
 
-                <option value="Cuota Enero">
-                    Cuota Enero
-                </option>
+                <option value="Cuota Rotary International">Cuota Rotary International</option>
+                <option value="Cuota Distrital">Cuota Distrital</option>
 
-                <option value="Cuota Febrero">
-                    Cuota Febrero
-                </option>
-
-                <option value="Cuota Marzo">
-                    Cuota Marzo
-                </option>
-
-                <option value="Cuota Abril">
-                    Cuota Abril
-                </option>
-
-                <option value="Cuota Mayo">
-                    Cuota Mayo
-                </option>
-
-                <option value="Cuota Junio">
-                    Cuota Junio
-                </option>
-
-                <option value="Cuota Julio">
-                    Cuota Julio
-                </option>
-
-                <option value="Cuota Agosto">
-                    Cuota Agosto
-                </option>
-
-                <option value="Cuota Septiembre">
-                    Cuota Septiembre
-                </option>
-
-                <option value="Cuota Octubre">
-                    Cuota Octubre
-                </option>
-
-                <option value="Cuota Noviembre">
-                    Cuota Noviembre
-                </option>
-
-                <option value="Cuota Diciembre">
-                    Cuota Diciembre
-                </option>
-
-                <option value="Cuota Rotary International">
-                    Cuota Rotary International
-                </option>
-
-                <option value="Cuota Distrital">
-                    Cuota Distrital
-                </option>
-
-                <option value="Cuota AIRAC">
-                    Cuota AIRAC
-                </option>
-
-                <option value="Otro">
-                    Otro
-                </option>
-            
-            <label>
-                Monto Pagado
-            </label>
-
-            <input type="number" id="montoPagado" placeholder="20" required>
-
-                <label>Tipo de Pago</label>
-                <select id="tipoPago" required>
-                    <option value="">
-                        Seleccione...
-                    </option>
-                    <option value="QR">
-                        QR
-                    </option>
-                    <option value="Efectivo">
-                        Efectivo
-                    </option>
-                    <option value="Transferencia">
-                        Transferencia
-                    </option>
+                <option value="Cuota AIRAC">Cuota AIRAC</option>
+                <option value="Otro">Otro</option>
             </select>
 
-            <button type="submit">
+            <label>Monto Pagado</label>
+            <input type="number" id="montoPagado" required>
 
-                Registrar Pago
+            <label>Tipo de Pago</label>
+            <select id="tipoPago" required>
+                <option value="">Seleccione...</option>
+                <option value="QR">QR</option>
+                <option value="Efectivo">Efectivo</option>
+                <option value="Transferencia">Transferencia</option>
+            </select>
 
-            </button>
+            <!-- QR -->
+            <div id="contenedorQR" style="display:none; text-align:center; margin:20px 0;">
+                <img id="imagenQR" src="" alt="Código QR" width="250">
+            </div>
+
+            <button type="submit">Registrar Pago</button>
 
         </form>
 
         <div class="botones">
-
             <button class="btnVolver" onclick="window.location.href='dashboard.html'">
                 ← Volver
             </button>
-
         </div>
 
     </div>
 
-    <script type="module"src="js/registrar-pago.js">
+    <!-- TU JS FIREBASE -->
+    <script type="module" src="js/registrar-pago.js"></script>
+
+    <!-- JS DEL QR -->
+    <script>
+        const conceptoPago = document.getElementById("conceptoPago");
+        const contenedorQR = document.getElementById("contenedorQR");
+        const imagenQR = document.getElementById("imagenQR");
+        const form = document.getElementById("formPago");
+
+        const cuotasMensuales = [
+            "Cuota Enero",
+            "Cuota Febrero",
+            "Cuota Marzo",
+            "Cuota Abril",
+            "Cuota Mayo",
+            "Cuota Junio",
+            "Cuota Julio",
+            "Cuota Agosto",
+            "Cuota Septiembre",
+            "Cuota Octubre",
+            "Cuota Noviembre",
+            "Cuota Diciembre"
+        ];
+
+        conceptoPago.addEventListener("change", function () {
+
+            const concepto = this.value;
+
+            if (cuotasMensuales.includes(concepto)) {
+
+                imagenQR.src = "img/Cuotas26.jpeg";
+                contenedorQR.style.display = "block";
+
+            } else if (concepto === "Cuota Distrital") {
+
+                imagenQR.src = "img/CuotaDistrital.jpeg";
+                contenedorQR.style.display = "block";
+
+            } else if (concepto === "Cuota Rotary International") {
+
+                imagenQR.src = "img/CuotaRI.jpg";
+                contenedorQR.style.display = "block";
+
+            } else {
+
+                contenedorQR.style.display = "none";
+                imagenQR.src = "";
+
+            }
+
+        });
+
+        form.addEventListener("reset", () => {
+            contenedorQR.style.display = "none";
+            imagenQR.src = "";
+        });
     </script>
 
 </body>
