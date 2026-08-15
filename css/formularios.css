@@ -1,217 +1,708 @@
+/* =========================================
+   FUENTE
+   ========================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
 
-    min-height:100vh;
+/* =========================================
+   BODY
+   ========================================= */
 
-    background:#d22163;
+body {
+    min-height: 100vh;
 
-    display:flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    justify-content:center;
+    padding: 30px 20px;
 
-    align-items:center;
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #ee468d,
+        #f571ad
+    );
 
-    padding:30px;
+    color: #333;
 }
 
-.contenedor{
 
-    width:100%;
+/* =========================================
+   CONTENEDOR
+   ========================================= */
 
-    max-width:700px;
+.contenedor {
+    position: relative;
 
-    background:white;
+    width: 100%;
+    max-width: 750px;
 
-    border-radius:20px;
+    padding: 40px;
 
-    padding:35px;
+    background: rgba(255, 254, 254, 0.97);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
 
     box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
+        0 15px 40px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
 }
 
-h1{
 
-    text-align:center;
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
 
-    color:#d22163;
+.contenedor::before {
 
-    margin-bottom:30px;
+    content: "";
 
-    font-size:2rem;
+    position: absolute;
+
+    width: 500px;
+    height: 500px;
+
+    left: 50%;
+    top: 55%;
+
+    transform: translate(-50%, -50%);
+
+    background-image: url('../img/roto.png');
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    /* OPACIDAD DE LA MARCA DE AGUA */
+    opacity: 0.65;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
-form{
 
-    display:flex;
+/* =========================================
+   CONTENIDO ENCIMA DE LA MARCA
+   ========================================= */
 
-    flex-direction:column;
+.contenedor > * {
+    position: relative;
 
-    gap:15px;
+    z-index: 1;
 }
 
-label{
 
-    font-size:.95rem;
+/* =========================================
+   TÍTULO
+   ========================================= */
 
-    color:#555;
+.contenedor h1 {
 
-    font-weight:500;
+    text-align: center;
+
+    margin-bottom: 30px;
+
+    color: #d22163;
+
+    font-size: 1.8rem;
+
+    font-weight: 700;
 }
 
-input,
-select,
-textarea{
 
-    width:100%;
+/* =========================================
+   FORMULARIO
+   ========================================= */
 
-    padding:14px;
+#formPago,
+#formReunion,
+#formActividad {
 
-    border:2px solid #e5e7eb;
-
-    border-radius:12px;
-
-    outline:none;
-
-    font-size:.95rem;
-
-    transition:.3s;
+    width: 100%;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
 
-    border-color:#d22163;
+/* =========================================
+   LABELS
+   ========================================= */
+
+#formPago > label,
+#formReunion > label,
+#formActividad > label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #000;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   INPUTS Y SELECTS
+   ========================================= */
+
+#formPago input,
+#formPago select,
+
+#formReunion input,
+#formReunion select,
+
+#formActividad input {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    margin-bottom: 20px;
+
+    background: transparent;
+
+    border: 2px solid rgba(210, 33, 99, .35);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #333;
+
+    font-size: .95rem;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+
+/* =========================================
+   PLACEHOLDER
+   ========================================= */
+
+#formPago input::placeholder,
+#formReunion input::placeholder,
+#formActividad input::placeholder {
+
+    color: #777;
+}
+
+
+/* =========================================
+   FOCUS
+   ========================================= */
+
+#formPago input:focus,
+#formPago select:focus,
+
+#formReunion input:focus,
+#formReunion select:focus,
+
+#formActividad input:focus {
+
+    background: #ffffff;
+
+    border-color: #d22163;
 
     box-shadow:
-    0 0 0 4px rgba(0,93,170,.15);
+        0 0 0 4px rgba(210, 33, 99, .12);
 }
 
-textarea{
 
-    resize:vertical;
+/* =========================================
+   SELECT
+   ========================================= */
 
-    min-height:120px;
+#formPago select,
+#formReunion select {
+
+    cursor: pointer;
 }
 
-button{
 
-    border:none;
+/* =========================================
+   MONTO
+   ========================================= */
 
-    border-radius:12px;
+#montoPagado {
 
-    padding:14px;
-
-    font-size:1rem;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-button[type="submit"]{
-
-    background:
-    linear-gradient(
-    135deg,
-    #d22163,
-    #e84b86
-);
-
-    color:white;
-}
-
-button[type="submit"]:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-    0 10px 20px rgba(34,197,94,.25);
-}
-
-.btnVolver{
-
-    margin-top:10px;
-
-    background:#6b7280;
-
-    color:white;
-}
-
-.btnVolver:hover{
-
-    background:#4b5563;
-}
-
-.botones{
-
-    display:flex;
-
-    gap:10px;
-
-    margin-top:15px;
-}
-
-@media(max-width:768px){
-
-    .contenedor{
-
-        padding:25px;
-    }
-
-    h1{
-
-        font-size:1.6rem;
-    }
-
-    .botones{
-
-        flex-direction:column;
-    }
+    font-weight: 500;
 
 }
+
+
+/* =========================================
+   TÍTULOS DE ASISTENCIA
+   ========================================= */
+
+#formReunion h3,
+#formActividad h3 {
+
+    margin-top: 25px;
+
+    margin-bottom: 15px;
+
+    padding-bottom: 8px;
+
+    color: #d22163;
+
+    font-size: 1.05rem;
+
+    font-weight: 600;
+
+    border-bottom:
+        2px solid rgba(210, 33, 99, .15);
+}
+
+
+/* =========================================
+   LISTAS DE SOCIOS
+   ========================================= */
+
 #listaSocios,
-#listaSimpatizantes{
+#listaSimpatizantes {
 
-    max-height:250px;
+    display: flex;
 
-    overflow-y:auto;
+    flex-direction: column;
 
-    border:1px solid #ddd;
+    gap: 10px;
 
-    border-radius:10px;
+    margin-bottom: 25px;
 
-    padding:15px;
+    max-height: 300px;
 
-    margin-bottom:15px;
+    overflow-y: auto;
+
+    padding-right: 5px;
 }
+
+
+/* =========================================
+   ELEMENTOS DE LAS LISTAS
+   ========================================= */
 
 #listaSocios label,
-#listaSimpatizantes label{
+#listaSimpatizantes label {
 
-    display:block;
+    display: flex;
 
-    margin-bottom:8px;
+    align-items: center;
 
-    cursor:pointer;
+    gap: 10px;
+
+    width: 100%;
+
+    padding: 12px 15px;
+
+    margin: 0;
+
+    background: transparent;
+
+    border: 2px solid rgba(210, 33, 99, .20);
+
+    border-radius: 12px;
+
+    cursor: pointer;
+
+    color: #333;
+
+    font-size: .9rem;
+
+    font-weight: 400;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        transform .2s ease,
+        box-shadow .3s ease;
 }
 
-h3{
 
-    color:#d22163;
+/* =========================================
+   HOVER
+   ========================================= */
 
-    margin-top:15px;
+#listaSocios label:hover,
+#listaSimpatizantes label:hover {
 
-    margin-bottom:10px;
+    background: rgba(255, 255, 255, .40);
+
+    border-color:
+        rgba(210, 33, 99, .45);
+
+    transform: translateX(3px);
+
+    box-shadow:
+        0 4px 10px rgba(210, 33, 99, .08);
+}
+
+
+/* =========================================
+   SELECCIONADO
+   ========================================= */
+
+#listaSocios label:has(input:checked),
+#listaSimpatizantes label:has(input:checked) {
+
+    background:
+        rgba(210, 33, 99, .10);
+
+    border-color: #d22163;
+
+    box-shadow:
+        0 4px 12px rgba(210, 33, 99, .12);
+}
+
+
+/* =========================================
+   CHECKBOX
+   ========================================= */
+
+#listaSocios input[type="checkbox"],
+#listaSimpatizantes input[type="checkbox"] {
+
+    width: 18px;
+
+    height: 18px;
+
+    margin: 0;
+
+    padding: 0;
+
+    accent-color: #d22163;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================
+   CONTENEDOR QR
+   ========================================= */
+
+#contenedorQR {
+
+    width: 100%;
+
+    margin: 10px 0 25px !important;
+
+    padding: 20px;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: rgba(255, 255, 255, .35);
+
+    border: 2px solid rgba(210, 33, 99, .20);
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 15px rgba(210, 33, 99, .08);
+}
+
+
+/* =========================================
+   IMAGEN QR
+   ========================================= */
+
+#imagenQR {
+
+    display: block;
+
+    width: 250px;
+
+    max-width: 100%;
+
+    height: auto;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .12);
+
+    background: white;
+
+    padding: 8px;
+
+}
+
+
+/* =========================================
+   BOTÓN REGISTRAR
+   ========================================= */
+
+#formPago > button[type="submit"],
+#formReunion > button[type="submit"],
+#formActividad > button[type="submit"] {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    box-shadow:
+        0 6px 15px rgba(210, 33, 99, .18);
+
+    transition: .3s;
+}
+
+
+/* =========================================
+   HOVER BOTÓN
+   ========================================= */
+
+#formPago > button[type="submit"]:hover,
+#formReunion > button[type="submit"]:hover,
+#formActividad > button[type="submit"]:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 20px rgba(210, 33, 99, .30);
+}
+
+
+/* =========================================
+   ACTIVE
+   ========================================= */
+
+#formPago > button[type="submit"]:active,
+#formReunion > button[type="submit"]:active,
+#formActividad > button[type="submit"]:active {
+
+    transform: translateY(0);
+}
+
+
+/* =========================================
+   BOTONES INFERIORES
+   ========================================= */
+
+.botones {
+
+    width: 100%;
+
+    margin-top: 12px;
+}
+
+
+/* =========================================
+   BOTÓN VOLVER
+   ========================================= */
+
+.btnVolver {
+
+    width: 100%;
+
+    padding: 13px;
+
+    border: 2px solid #d22163;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #d22163;
+
+    font-size: .95rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: .3s;
+}
+
+
+/* =========================================
+   HOVER VOLVER
+   ========================================= */
+
+.btnVolver:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(210, 33, 99, .25);
+}
+
+
+/* =========================================
+   SCROLL
+   ========================================= */
+
+#listaSocios::-webkit-scrollbar,
+#listaSimpatizantes::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+
+#listaSocios::-webkit-scrollbar-thumb,
+#listaSimpatizantes::-webkit-scrollbar-thumb {
+
+    background: #d22163;
+
+    border-radius: 10px;
+}
+
+
+#listaSocios::-webkit-scrollbar-track,
+#listaSimpatizantes::-webkit-scrollbar-track {
+
+    background:
+        rgba(210, 33, 99, .08);
+
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 20px 12px;
+
+        align-items: flex-start;
+
+    }
+
+
+    .contenedor {
+
+        padding: 28px 20px;
+
+        border-radius: 18px;
+
+    }
+
+
+    .contenedor h1 {
+
+        font-size: 1.5rem;
+
+        margin-bottom: 25px;
+
+    }
+
+
+    #formPago input,
+    #formPago select,
+
+    #formReunion input,
+    #formReunion select,
+
+    #formActividad input {
+
+        padding: 12px;
+
+    }
+
+
+    #imagenQR {
+
+        width: 220px;
+
+    }
+
+
+    #contenedorQR {
+
+        padding: 15px;
+
+    }
+
+
+    #listaSocios label,
+    #listaSimpatizantes label {
+
+        padding: 11px 12px;
+
+        font-size: .85rem;
+
+    }
+
+
+    #formPago > button[type="submit"],
+    #formReunion > button[type="submit"],
+    #formActividad > button[type="submit"],
+    .btnVolver {
+
+        padding: 13px;
+
+    }
+
 }

@@ -1,199 +1,500 @@
+/* =========================================
+   FUENTE
+   ========================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
 
-    min-height:100vh;
+/* =========================================
+   BODY
+   ========================================= */
 
-    background:
-    linear-gradient(
+body {
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px 20px;
+
+    background: linear-gradient(
         135deg,
-        #005daa,
-        #1f3b73
+        #d22163,
+        #ee468d,
+        #f571ad
     );
 
-    padding:30px;
+    color: #333;
 }
 
-.contenedor{
 
-    max-width:900px;
+/* =========================================
+   CONTENEDOR
+   ========================================= */
 
-    margin:auto;
+.contenedor {
 
-    background:white;
+    position: relative;
 
-    border-radius:20px;
+    width: 100%;
 
-    padding:35px;
+    max-width: 650px;
 
-    box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
-}
-
-.cabecera{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    margin-bottom:30px;
-
-    flex-wrap:wrap;
-
-    gap:15px;
-}
-
-h1{
-
-    color:#005daa;
-
-    font-size:2rem;
-}
-
-form{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(280px,1fr));
-
-    gap:20px;
-}
-
-.grupo{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:8px;
-}
-
-label{
-
-    color:#555;
-
-    font-size:.95rem;
-
-    font-weight:500;
-}
-
-input,
-select{
-
-    padding:14px;
-
-    border:2px solid #e5e7eb;
-
-    border-radius:12px;
-
-    outline:none;
-
-    transition:.3s;
-
-    font-size:.95rem;
-}
-
-input:focus,
-select:focus{
-
-    border-color:#005daa;
-
-    box-shadow:
-    0 0 0 4px rgba(0,93,170,.15);
-}
-
-.btnGuardar{
-
-    grid-column:1/-1;
-
-    border:none;
-
-    padding:15px;
-
-    border-radius:12px;
+    padding: 40px;
 
     background:
-    linear-gradient(
-        135deg,
-        #16a34a,
-        #22c55e
-    );
+        rgba(255, 254, 254, .97);
 
-    color:white;
+    backdrop-filter: blur(10px);
 
-    font-size:1rem;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-}
-
-.btnGuardar:hover{
-
-    transform:translateY(-2px);
+    border-radius: 20px;
 
     box-shadow:
-    0 10px 20px rgba(34,197,94,.25);
+        0 15px 40px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
 }
 
-.btnVolver{
 
-    border:none;
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
 
-    background:#6b7280;
+.contenedor::before {
 
-    color:white;
+    content: "";
 
-    padding:12px 18px;
+    position: absolute;
 
-    border-radius:10px;
+    width: 520px;
 
-    cursor:pointer;
+    height: 520px;
 
-    font-weight:600;
+    left: 50%;
 
-    transition:.3s;
+    top: 55%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background-image:
+        url('../img/roto.png');
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: .65;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
-.btnVolver:hover{
 
-    background:#4b5563;
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.contenedor > * {
+
+    position: relative;
+
+    z-index: 1;
 }
 
-@media(max-width:768px){
 
-    .cabecera{
+/* =========================================
+   CABECERA
+   ========================================= */
 
-        flex-direction:column;
+.cabecera {
 
-        align-items:stretch;
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.cabecera h1 {
+
+    margin-right: auto;
+
+    color: #d22163;
+
+    font-size: 1.8rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BOTÓN VOLVER
+   ========================================= */
+
+.btnVolver {
+
+    padding: 11px 18px;
+
+    border: 2px solid #d22163;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #d22163;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+
+    transition: .3s;
+}
+
+
+.btnVolver:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(210, 33, 99, .25);
+}
+
+
+/* =========================================
+   FORMULARIO
+   ========================================= */
+
+#formEditar {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* =========================================
+   GRUPO
+   ========================================= */
+
+.grupo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+/* =========================================
+   LABEL
+   ========================================= */
+
+.grupo label {
+
+    color: #222;
+
+    font-size: .88rem;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   INPUTS Y SELECT
+   ========================================= */
+
+.grupo input,
+.grupo select {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    background: transparent;
+
+    border: 2px solid
+        rgba(210, 33, 99, .30);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #333;
+
+    font-size: .95rem;
+
+    transition:
+        background .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease,
+        transform .2s ease;
+}
+
+
+/* =========================================
+   PLACEHOLDER
+   ========================================= */
+
+.grupo input::placeholder {
+
+    color: #777;
+}
+
+
+/* =========================================
+   FOCUS
+   ========================================= */
+
+.grupo input:focus,
+.grupo select:focus {
+
+    background: #ffffff;
+
+    border-color: #d22163;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(210, 33, 99, .12);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================
+   SELECT
+   ========================================= */
+
+.grupo select {
+
+    cursor: pointer;
+
+    appearance: auto;
+}
+
+
+.grupo select option {
+
+    background: white;
+
+    color: #333;
+}
+
+
+/* =========================================
+   FECHAS
+   ========================================= */
+
+.grupo input[type="date"] {
+
+    cursor: pointer;
+}
+
+
+.grupo input[type="date"]
+::-webkit-calendar-picker-indicator {
+
+    cursor: pointer;
+
+    opacity: .7;
+
+    filter:
+        invert(24%)
+        sepia(85%)
+        saturate(1200%)
+        hue-rotate(300deg);
+}
+
+
+/* =========================================
+   BOTÓN GUARDAR
+   ========================================= */
+
+.btnGuardar {
+
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    box-shadow:
+        0 6px 15px
+        rgba(210, 33, 99, .20);
+
+    transition: .3s;
+}
+
+
+.btnGuardar:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(210, 33, 99, .30);
+}
+
+
+.btnGuardar:active {
+
+    transform: scale(.98);
+}
+
+
+/* =========================================
+   FONT AWESOME
+   ========================================= */
+
+.btnGuardar i,
+.btnVolver i {
+
+    font-size: .95rem;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    body {
+
+        padding: 20px 12px;
+
+        align-items: flex-start;
     }
 
-    .btnVolver{
 
-        width:100%;
+    .contenedor {
+
+        padding: 30px 20px;
+
+        border-radius: 18px;
     }
 
-    h1{
 
-        text-align:center;
+    .cabecera {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
     }
 
-    form{
 
-        grid-template-columns:1fr;
+    .cabecera h1 {
+
+        margin-right: 0;
+
+        font-size: 1.5rem;
+    }
+
+
+    .btnVolver {
+
+        width: 100%;
+    }
+
+
+    #formEditar {
+
+        gap: 14px;
+    }
+
+
+    .grupo input,
+    .grupo select {
+
+        padding: 12px 13px;
+
+        font-size: .9rem;
+    }
+
+
+    .contenedor::before {
+
+        width: 400px;
+
+        height: 400px;
     }
 
 }

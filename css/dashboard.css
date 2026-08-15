@@ -1,120 +1,278 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    min-height:100vh;
-    background:#faa7ce;
+body {
+    min-height: 100vh;
+
+    background: linear-gradient(
+        135deg,
+        #faa7ce,
+        #f8c6df
+    );
+
+    color: #333;
 }
 
-header{
-    background:linear-gradient(135deg,#D22163);
-    color:white;
-    padding:20px 30px;
+/* =========================================
+   HEADER
+   ========================================= */
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+header {
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
 
-    box-shadow:0 4px 15px rgba(0,0,0,.15);
+    color: white;
+
+    padding: 20px 35px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, .18);
 }
 
-.user-info h1{
-    font-size:1.8rem;
+.user-info h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
 }
 
-.user-info p{
-    margin-top:5px;
-    opacity:.9;
+.user-info p {
+    margin-top: 5px;
+
+    font-size: .9rem;
+
+    opacity: .9;
 }
 
-#btnLogout{
-    background:white;
-    color:#D22163;
+/* =========================================
+   BOTÓN CERRAR SESIÓN
+   ========================================= */
 
-    border:none;
+#btnLogout {
+    background: white;
 
-    padding:12px 20px;
+    color: #d22163;
 
-    border-radius:12px;
+    border: none;
 
-    cursor:pointer;
+    padding: 12px 20px;
 
-    font-weight:600;
+    border-radius: 12px;
 
-    transition:.3s;
+    cursor: pointer;
+
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: .3s;
 }
 
-#btnLogout:hover{
-    transform:translateY(-2px);
+#btnLogout:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 15px rgba(0, 0, 0, .15);
 }
 
-main{
-    padding:40px;
+#btnLogout i {
+    font-size: 1rem;
+}
 
-    display:grid;
+/* =========================================
+   CONTENEDOR
+   ========================================= */
+
+main {
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 45px 30px;
+
+    display: grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(260px,1fr));
+        repeat(auto-fit, minmax(240px, 1fr));
 
-    gap:25px;
+    gap: 25px;
 }
 
-.card{
+/* =========================================
+   TARJETAS
+   ========================================= */
 
-    background:white;
+.card {
+    position: relative;
 
-    border-radius:20px;
+    background: rgba(255, 255, 255, .95);
 
-    padding:35px 25px;
+    border-radius: 20px;
 
-    text-align:center;
+    padding: 35px 25px;
 
-    cursor:pointer;
+    min-height: 180px;
 
-    transition:.3s;
+    display: flex;
 
-    box-shadow:
-    0 5px 20px rgba(0,0,0,.08);
-}
+    flex-direction: column;
 
-.card:hover{
+    justify-content: center;
 
-    transform:translateY(-8px);
+    align-items: center;
 
-    box-shadow:
-    0 12px 25px rgba(0,93,170,.18);
-}
-
-.card .icon{
-    font-size:4rem;
-    margin-bottom:15px;
-}
-
-.card h3{
-    color:#d22163;
-    margin-bottom:10px;
-}
-
-.card p{
-    color:#777;
-    font-size:.9rem;
-}
-
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#999;
-    font-size:.85rem;
-}
-.footer{
-    margin-top: 20px;
     text-align: center;
-    color: #535353;
+
+    cursor: pointer;
+
+    border: 2px solid transparent;
+
+    box-shadow:
+        0 6px 20px rgba(210, 33, 99, .12);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+
+/* =========================================
+   ICONOS FONT AWESOME
+   ========================================= */
+
+.card > i {
+    font-size: 3.8rem;
+
+    color: #d22163;
+
+    margin-bottom: 18px;
+
+    transition:
+        transform .3s ease,
+        color .3s ease;
+}
+
+/* =========================================
+   TITULOS
+   ========================================= */
+
+.card h3 {
+    color: #d22163;
+
+    font-size: 1rem;
+
+    font-weight: 600;
+
+    line-height: 1.4;
+}
+
+/* =========================================
+   HOVER
+   ========================================= */
+
+.card:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(210, 33, 99, .25);
+
+    box-shadow:
+        0 15px 30px rgba(210, 33, 99, .22);
+}
+
+.card:hover > i {
+    transform: scale(1.12);
+
+    color: #e84b86;
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
+    text-align: center;
+
+    padding: 10px 20px 25px;
+
+    color: #666;
+
     font-size: .8rem;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 18px 20px;
+
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+    .user-info h1 {
+        font-size: 1.5rem;
+    }
+
+    main {
+        padding: 25px 20px;
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .card {
+        min-height: 160px;
+
+        padding: 30px 20px;
+    }
+
+    .card > i {
+        font-size: 3.3rem;
+    }
+}
+#nombreUsuario {
+    margin-top: 5px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+#nombreUsuario .saludo {
+    font-size: .95rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, .95);
+}
+
+#nombreUsuario .saludo strong {
+    font-weight: 600;
+}
+
+#nombreUsuario .cargo {
+    font-size: .78rem;
+    color: rgba(255, 255, 255, .75);
+    font-weight: 400;
 }

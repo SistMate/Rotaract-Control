@@ -13,71 +13,155 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* =========================================
+   ELEMENTOS DEL DOM
+   ========================================= */
+
 const nombreUsuario =
-document.getElementById(
-    "nombreUsuario"
-);
+    document.getElementById("nombreUsuario");
+
+const btnCerrarSesion =
+    document.getElementById("btnLogout");
+
+
+/* =========================================
+   OBTENER SALUDO SEGÚN LA HORA
+   ========================================= */
+
+function obtenerSaludo() {
+
+    const hora = new Date().getHours();
+
+    if (hora >= 5 && hora < 12) {
+        return "Buenos días";
+    }
+
+    if (hora >= 12 && hora < 19) {
+        return "Buenas tardes";
+    }
+
+    return "Buenas noches";
+}
+
+
+/* =========================================
+   VERIFICAR SESIÓN
+   ========================================= */
 
 onAuthStateChanged(
     auth,
-    async(user)=>{
+    async (user) => {
 
-        if(!user){
+        /* =====================================
+           USUARIO NO AUTENTICADO
+           ===================================== */
 
-            window.location.href =
-            "index.html";
+        if (!user) {
+
+            window.location.href = "index.html";
 
             return;
         }
 
-        try{
+
+        /* =====================================
+           OBTENER DATOS DEL USUARIO
+           ===================================== */
+
+        try {
 
             const docRef =
-            doc(
-                db,
-                "Usuarios",
-                user.uid
-            );
+                doc(
+                    db,
+                    "Usuarios",
+                    user.uid
+                );
+
 
             const docSnap =
-            await getDoc(
-                docRef
-            );
+                await getDoc(docRef);
 
-            if(docSnap.exists()){
+
+            /* =================================
+               USUARIO ENCONTRADO
+               ================================= */
+
+            if (docSnap.exists()) {
 
                 const datos =
-                docSnap.data();
+                    docSnap.data();
+
+                const saludo =
+                    obtenerSaludo();
+
 
                 nombreUsuario.innerHTML = `
-                    Hola,
-                    <strong>${datos.nombre}</strong>
-                    <br>
-                    <small>
-                        Cargo: ${datos.cargo}
-                    </small>
+
+                    <span class="saludo">
+                        ${saludo},
+                        <strong>${datos.nombre}</strong> 👋
+                    </span>
+
+                    <span class="cargo">
+                        ${datos.cargo}
+                        · Rotaract Club Cochabamba
+                    </span>
+
                 `;
 
             }
-            else{
+
+
+            /* =================================
+               USUARIO SIN INFORMACIÓN
+               ================================= */
+
+            else {
+
+                const saludo =
+                    obtenerSaludo();
+
 
                 nombreUsuario.innerHTML = `
-                    Hola
-                    <br>
-                    <small>
+
+                    <span class="saludo">
+                        ${saludo} 👋
+                    </span>
+
+                    <span class="cargo">
                         Usuario sin información
-                    </small>
+                    </span>
+
                 `;
 
             }
 
         }
-        catch(error){
 
-            console.error(error);
 
-            nombreUsuario.innerHTML =
-            "Error al cargar usuario";
+        /* =====================================
+           ERROR AL OBTENER DATOS
+           ===================================== */
+
+        catch (error) {
+
+            console.error(
+                "Error al cargar los datos del usuario:",
+                error
+            );
+
+            nombreUsuario.innerHTML = `
+
+                <span class="saludo">
+                    ${obtenerSaludo()}
+                </span>
+
+                <span class="cargo">
+                    Error al cargar información
+                </span>
+
+            `;
 
         }
 
@@ -85,21 +169,33 @@ onAuthStateChanged(
 );
 
 
-const btnCerrarSesion =
-document.getElementById(
-    "btnLogout"
-);
+/* =========================================
+   CERRAR SESIÓN
+   ========================================= */
 
-if(btnCerrarSesion){
+if (btnCerrarSesion) {
 
     btnCerrarSesion.addEventListener(
         "click",
-        async()=>{
+        async () => {
 
-            await signOut(auth);
+            try {
 
-            window.location.href =
-            "index.html";
+                await signOut(auth);
+
+                window.location.href =
+                    "index.html";
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Error al cerrar sesión:",
+                    error
+                );
+
+            }
 
         }
     );

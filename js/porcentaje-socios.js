@@ -7,124 +7,283 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
 const tabla =
 document.getElementById(
     "tablaSocios"
 );
 
-async function cargarDatos(){
 
-    const sociosSnap =
-    await getDocs(
-        collection(db,"Socios")
-    );
+/* =========================================
+   CARGAR DATOS
+   ========================================= */
 
-    const reunionesSnap =
-    await getDocs(
-        collection(db,"Reunion")
-    );
+async function cargarDatos() {
 
-    const actividadesSnap =
-    await getDocs(
-        collection(db,"Actividad")
-    );
+    try {
 
-    const totalReuniones =
-    reunionesSnap.size;
+        const sociosSnap =
+        await getDocs(
+            collection(
+                db,
+                "Socios"
+            )
+        );
 
-    const totalActividades =
-    actividadesSnap.size;
 
-    sociosSnap.forEach(
-        (docSocio)=>{
+        const reunionesSnap =
+        await getDocs(
+            collection(
+                db,
+                "Reunion"
+            )
+        );
 
-            const socio =
-            docSocio.data();
 
-            const nombre =
-            socio["Nombre Completo"];
+        const actividadesSnap =
+        await getDocs(
+            collection(
+                db,
+                "Actividad"
+            )
+        );
 
-            let reunionesAsistidas = 0;
-            let actividadesAsistidas = 0;
 
-            reunionesSnap.forEach(
-                (reunion)=>{
+        const totalReuniones =
+        reunionesSnap.size;
 
-                    const datos =
-                    reunion.data();
 
-                    if(
-                        datos.asistenciaSocios &&
-                        datos.asistenciaSocios.includes(nombre)
-                    ){
-                        reunionesAsistidas++;
+        const totalActividades =
+        actividadesSnap.size;
+
+
+        tabla.innerHTML = "";
+
+
+        /* =====================================
+           SIN SOCIOS
+           ===================================== */
+
+        if (sociosSnap.empty) {
+
+            tabla.innerHTML = `
+                <tr>
+
+                    <td colspan="4">
+
+                        <i class="fa-solid fa-users-slash"></i>
+
+                        No hay socios registrados
+
+                    </td>
+
+                </tr>
+            `;
+
+            return;
+        }
+
+
+        /* =====================================
+           RECORRER SOCIOS
+           ===================================== */
+
+        sociosSnap.forEach(
+            (docSocio) => {
+
+                const socio =
+                docSocio.data();
+
+
+                const nombre =
+                socio["Nombre Completo"];
+
+
+                let reunionesAsistidas = 0;
+
+                let actividadesAsistidas = 0;
+
+
+                /* =================================
+                   REUNIONES
+                   ================================= */
+
+                reunionesSnap.forEach(
+                    (reunion) => {
+
+                        const datos =
+                        reunion.data();
+
+
+                        if (
+                            datos.asistenciaSocios &&
+                            datos.asistenciaSocios.includes(nombre)
+                        ) {
+
+                            reunionesAsistidas++;
+
+                        }
+
                     }
+                );
 
-                }
-            );
 
-            actividadesSnap.forEach(
-                (actividad)=>{
+                /* =================================
+                   ACTIVIDADES
+                   ================================= */
 
-                    const datos =
-                    actividad.data();
+                actividadesSnap.forEach(
+                    (actividad) => {
 
-                    if(
-                        datos.asistenciaSocios &&
-                        datos.asistenciaSocios.includes(nombre)
-                    ){
-                        actividadesAsistidas++;
+                        const datos =
+                        actividad.data();
+
+
+                        if (
+                            datos.asistenciaSocios &&
+                            datos.asistenciaSocios.includes(nombre)
+                        ) {
+
+                            actividadesAsistidas++;
+
+                        }
+
                     }
+                );
 
-                }
-            );
 
-            const totalEventos =
-            totalReuniones +
-            totalActividades;
+                /* =================================
+                   PORCENTAJE
+                   ================================= */
 
-            const asistencias =
-            reunionesAsistidas +
-            actividadesAsistidas;
+                const totalEventos =
+                totalReuniones +
+                totalActividades;
 
-            const porcentaje =
-            totalEventos > 0
-            ?
-            (
-                asistencias
-                /
-                totalEventos
-            ) * 100
-            :
-            0;
 
-            tabla.innerHTML += `
+                const asistencias =
+                reunionesAsistidas +
+                actividadesAsistidas;
+
+
+                const porcentaje =
+                totalEventos > 0
+                ?
+                (
+                    asistencias /
+                    totalEventos
+                ) * 100
+                :
+                0;
+
+
+                const porcentajeRedondeado =
+                porcentaje.toFixed(1);
+
+
+                /* =================================
+                   INSERTAR FILA
+                   ================================= */
+
+                tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            ${nombre || ""}
+
+                        </td>
+
+
+                        <td>
+
+                            ${reunionesAsistidas}
+
+                            /
+
+                            ${totalReuniones}
+
+                        </td>
+
+
+                        <td>
+
+                            ${actividadesAsistidas}
+
+                            /
+
+                            ${totalActividades}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="porcentaje-contenedor">
+
+                                <div class="barra">
+
+                                    <div
+                                        class="barra-progreso"
+                                        style="width:${porcentaje}%">
+
+                                    </div>
+
+                                </div>
+
+                                <span
+                                    class="porcentaje-texto">
+
+                                    ${porcentajeRedondeado}%
+
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error al cargar asistencia:",
+            error
+        );
+
+
+        tabla.innerHTML = `
+
             <tr>
 
-                <td>${nombre}</td>
+                <td colspan="4">
 
-                <td>
-                    ${reunionesAsistidas}
-                    /
-                    ${totalReuniones}
-                </td>
+                    <i class="fa-solid fa-circle-exclamation"></i>
 
-                <td>
-                    ${actividadesAsistidas}
-                    /
-                    ${totalActividades}
-                </td>
+                    Error al cargar los datos de asistencia
 
-                <td>
-                    ${porcentaje.toFixed(1)}%
                 </td>
 
             </tr>
-            `;
 
-        }
-    );
+        `;
+
+    }
 
 }
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
 
 cargarDatos();

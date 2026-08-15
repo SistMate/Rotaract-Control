@@ -13,6 +13,14 @@
         Editar Simpatizante
     </title>
 
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
     <link
         rel="stylesheet"
         href="css/formularios.css">
@@ -23,28 +31,92 @@
 
     <div class="contenedor">
 
-        <h1>
-            Editar Simpatizante
-        </h1>
+        <!-- =====================================
+             CABECERA
+             ===================================== -->
+
+        <div class="cabecera">
+
+            <h1>
+                Editar Simpatizante
+            </h1>
+
+            <button
+                type="button"
+                class="btnVolver"
+                onclick="window.location.href='simpatizantes.html'">
+
+                <i class="fa-solid fa-caret-left"></i>
+
+                Volver
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             FORMULARIO
+             ===================================== -->
 
         <form id="formEditar">
 
-            <input
-                type="text"
-                id="nombre"
-                placeholder="Nombre Completo"
-                required>
 
-            <input
-                type="number"
-                id="celular"
-                placeholder="Celular">
+            <!-- NOMBRE -->
 
-            <input
-                type="date"
-                id="fechaIngreso">
+            <div class="grupo">
 
-            <button type="submit">
+                <label for="nombre">
+                    Nombre Completo
+                </label>
+
+                <input
+                    type="text"
+                    id="nombre"
+                    placeholder="Nombre Completo"
+                    required>
+
+            </div>
+
+
+            <!-- CELULAR -->
+
+            <div class="grupo">
+
+                <label for="celular">
+                    Celular
+                </label>
+
+                <input
+                    type="number"
+                    id="celular"
+                    placeholder="Número de celular">
+
+            </div>
+
+
+            <!-- FECHA DE INGRESO -->
+
+            <div class="grupo">
+
+                <label for="fechaIngreso">
+                    Fecha de Ingreso
+                </label>
+
+                <input
+                    type="date"
+                    id="fechaIngreso">
+
+            </div>
+
+
+            <!-- GUARDAR -->
+
+            <button
+                type="submit"
+                class="btnGuardar">
+
+                <i class="fa-solid fa-floppy-disk"></i>
 
                 Guardar Cambios
 
@@ -52,19 +124,10 @@
 
         </form>
 
-        <div class="botones">
-
-            <button
-                class="btnVolver"
-                onclick="window.location.href='simpatizantes.html'">
-
-                ← Volver
-
-            </button>
-
-        </div>
-
     </div>
+
+
+    <!-- JAVASCRIPT -->
 
     <script
         type="module"

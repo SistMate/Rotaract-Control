@@ -9,19 +9,37 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* =========================================
+   ELEMENTOS
+   ========================================= */
+
 const form =
-document.getElementById(
-    "formPago"
-);
+document.getElementById("formPago");
 
 const selectSocio =
-document.getElementById(
-    "nombreSocio"
-);
+document.getElementById("nombreSocio");
 
-async function cargarSocios(){
+const conceptoPago =
+document.getElementById("conceptoPago");
 
-    try{
+const tipoPago =
+document.getElementById("tipoPago");
+
+const contenedorQR =
+document.getElementById("contenedorQR");
+
+const imagenQR =
+document.getElementById("imagenQR");
+
+
+/* =========================================
+   CARGAR SOCIOS
+   ========================================= */
+
+async function cargarSocios() {
+
+    try {
 
         const querySnapshot =
         await getDocs(
@@ -31,30 +49,32 @@ async function cargarSocios(){
             )
         );
 
-        selectSocio.innerHTML =
-        `
-        <option value="">
-            Seleccione un socio
-        </option>
+        selectSocio.innerHTML = `
+            <option value="">
+                Seleccione un socio
+            </option>
         `;
 
         querySnapshot.forEach(
-            (documento)=>{
+            (documento) => {
 
                 const socio =
                 documento.data();
 
+                const nombre =
+                socio["Nombre Completo"];
+
                 selectSocio.innerHTML += `
-                <option value="${socio["Nombre Completo"]}">
-                    ${socio["Nombre Completo"]}
-                </option>
+                    <option value="${nombre}">
+                        ${nombre}
+                    </option>
                 `;
 
             }
         );
 
     }
-    catch(error){
+    catch (error) {
 
         console.error(error);
 
@@ -66,15 +86,181 @@ async function cargarSocios(){
 
 }
 
-cargarSocios();
+
+/* =========================================
+   CUOTAS MENSUALES
+   ========================================= */
+
+const cuotasMensuales = [
+
+    "Cuota Enero",
+    "Cuota Febrero",
+    "Cuota Marzo",
+    "Cuota Abril",
+    "Cuota Mayo",
+    "Cuota Junio",
+    "Cuota Julio",
+    "Cuota Agosto",
+    "Cuota Septiembre",
+    "Cuota Octubre",
+    "Cuota Noviembre",
+    "Cuota Diciembre"
+
+];
+
+
+/* =========================================
+   OBTENER QR SEGÚN CONCEPTO
+   ========================================= */
+
+function obtenerQR(concepto) {
+
+    if (
+        cuotasMensuales.includes(
+            concepto
+        )
+    ) {
+
+        return "img/Cuotas26.jpeg";
+
+    }
+
+
+    if (
+        concepto ===
+        "Cuota Distrital"
+    ) {
+
+        return "img/CuotaDistrital.jpg";
+
+    }
+
+
+    if (
+        concepto ===
+        "Cuota Rotary International"
+    ) {
+
+        return "img/CuotaRI.jpg";
+
+    }
+
+
+    return null;
+
+}
+
+
+/* =========================================
+   ACTUALIZAR QR
+   ========================================= */
+
+function actualizarQR() {
+
+    const tipo =
+    tipoPago.value;
+
+    const concepto =
+    conceptoPago.value;
+
+
+    /*
+        El QR SOLO aparece
+        si el tipo de pago es QR
+    */
+
+    if (
+        tipo !== "QR"
+    ) {
+
+        ocultarQR();
+
+        return;
+
+    }
+
+
+    const rutaQR =
+    obtenerQR(concepto);
+
+
+    /*
+        Si el concepto tiene
+        un QR configurado
+    */
+
+    if (rutaQR) {
+
+        imagenQR.src =
+        rutaQR;
+
+        contenedorQR.style.display =
+        "flex";
+
+    }
+    else {
+
+        ocultarQR();
+
+    }
+
+}
+
+
+/* =========================================
+   OCULTAR QR
+   ========================================= */
+
+function ocultarQR() {
+
+    contenedorQR.style.display =
+    "none";
+
+    imagenQR.src = "";
+
+}
+
+
+/* =========================================
+   CAMBIO TIPO DE PAGO
+   ========================================= */
+
+tipoPago.addEventListener(
+    "change",
+    () => {
+
+        actualizarQR();
+
+    }
+);
+
+
+/* =========================================
+   CAMBIO CONCEPTO
+   ========================================= */
+
+conceptoPago.addEventListener(
+    "change",
+    () => {
+
+        actualizarQR();
+
+    }
+);
+
+
+/* =========================================
+   REGISTRAR PAGO
+   ========================================= */
 
 form.addEventListener(
     "submit",
-    async(e)=>{
+    async (e) => {
 
         e.preventDefault();
 
-        try{
+
+        try {
 
             await addDoc(
                 collection(
@@ -84,9 +270,7 @@ form.addEventListener(
                 {
 
                     nombreSocio:
-                    document.getElementById(
-                        "nombreSocio"
-                    ).value,
+                    selectSocio.value,
 
                     fecha:
                     document.getElementById(
@@ -99,14 +283,10 @@ form.addEventListener(
                     ).value,
 
                     tipoPago:
-                    document.getElementById(
-                        "tipoPago"
-                    ).value,
+                    tipoPago.value,
 
                     conceptoPago:
-                    document.getElementById(
-                        "conceptoPago"
-                    ).value,
+                    conceptoPago.value,
 
                     fechaRegistro:
                     Timestamp.now()
@@ -114,14 +294,18 @@ form.addEventListener(
                 }
             );
 
+
             alert(
                 "Pago registrado correctamente"
             );
 
+
             form.reset();
 
+            ocultarQR();
+
         }
-        catch(error){
+        catch (error) {
 
             console.error(error);
 
@@ -133,3 +317,10 @@ form.addEventListener(
 
     }
 );
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
+
+cargarSocios();

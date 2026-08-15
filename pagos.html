@@ -5,70 +5,131 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>
         Historial de Pagos
     </title>
 
-    <link rel="stylesheet"
-          href="css/pagos.css">
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/pagos.css">
 
 </head>
 
 <body>
 
-<div class="contenedor">
+    <div class="contenedor">
 
-    <div class="cabecera">
+        <!-- =====================================
+             CABECERA
+             ===================================== -->
 
-        <h1>
-            Historial de Pagos
-        </h1>
+        <div class="cabecera">
 
-        <button
-            class="btnVolver"
-            onclick="window.location.href='dashboard.html'">
+            <h1>
+                Historial de Pagos
+            </h1>
 
-            ← Menú Principal
+            <button
+                type="button"
+                class="btnVolver"
+                onclick="window.location.href='dashboard.html'">
 
-        </button>
+                <i class="fa-solid fa-caret-left"></i>
+
+                Menú Principal
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             BUSCADOR
+             ===================================== -->
+
+        <div class="buscador">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="buscar"
+                placeholder="Buscar socio o concepto de pago...">
+
+        </div>
+
+
+        <!-- =====================================
+             TABLA
+             ===================================== -->
+
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            <i class="fa-solid fa-user"></i>
+                            Socio
+                        </th>
+
+                        <th>
+                            <i class="fa-solid fa-calendar"></i>
+                            Fecha
+                        </th>
+
+                        <th>
+                            <i class="fa-solid fa-file-invoice"></i>
+                            Motivo
+                        </th>
+
+                        <th>
+                            <i class="fa-solid fa-money-bill"></i>
+                            Monto
+                        </th>
+
+                        <th>
+                            <i class="fa-solid fa-gear"></i>
+                            Acción
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="tablaPagos">
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
-    <input
-        type="text"
-        id="buscar"
-        placeholder="Buscar socio...">
 
-    <table>
+    <!-- JAVASCRIPT -->
 
-        <thead>
-
-            <tr>
-
-                <th>Socio</th>
-                <th>Fecha</th>
-                <th>Motivo</th>
-                <th>Monto</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody id="tablaPagos">
-
-        </tbody>
-
-    </table>
-
-</div>
-
-<script
-    type="module"
-    src="js/pagos.js">
-</script>
+    <script
+        type="module"
+        src="js/pagos.js">
+    </script>
 
 </body>
 

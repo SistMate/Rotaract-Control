@@ -9,64 +9,184 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* =========================================
+   TABLA
+   ========================================= */
+
 const tabla =
 document.getElementById(
     "tablaSocios"
 );
-async function cargarSocios() {
 
-    const tabla = document.getElementById("tablaSocios");
+
+/* =========================================
+   CARGAR SOCIOS
+   ========================================= */
+
+async function cargarSocios() {
 
     tabla.innerHTML = "";
 
-    const querySnapshot = await getDocs(
-        collection(db, "Socios")
-    );
+    try {
 
-    querySnapshot.forEach((documento) => {
+        const querySnapshot =
+        await getDocs(
+            collection(
+                db,
+                "Socios"
+            )
+        );
 
-        const socio = documento.data();
 
-        tabla.innerHTML += `
-            <tr>
-                <td>${socio["Nombre Completo"] || ""}</td>
-                <td>${socio["Celular"] || ""}</td>
-                <td>${socio["FechaNacimiento"] || ""}</td>
-                 <td>
-                    <button
-                    class="btnEditar"
-                    onclick="editarSocio('${documento.id}')">
-                    Editar
-                 </button>
+        /* =====================================
+           SI NO HAY SOCIOS
+           ===================================== */
 
-                    <button
-                    class="btnEliminar"
-                    onclick="eliminarSocio('${documento.id}')">
-                    Eliminar
-                </button>
-            </td>
+        if (querySnapshot.empty) {
+
+            tabla.innerHTML = `
+                <tr>
+                    <td colspan="4">
+                        <i class="fa-solid fa-users-slash"></i>
+                        No hay socios registrados
+                    </td>
                 </tr>
+            `;
+
+            return;
+        }
+
+
+        /* =====================================
+           MOSTRAR SOCIOS
+           ===================================== */
+
+        querySnapshot.forEach(
+            (documento) => {
+
+                const socio =
+                documento.data();
+
+
+                tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>
+                            ${socio["Nombre Completo"] || ""}
+                        </td>
+
+                        <td>
+                            ${socio["Celular"] || ""}
+                        </td>
+
+                        <td>
+                            ${socio["FechaNacimiento"] || ""}
+                        </td>
+
+
+                        <!-- ACCIONES -->
+
+                        <td>
+
+                            <div class="acciones">
+
+                                <!-- EDITAR -->
+
+                                <button
+                                    type="button"
+                                    class="btnEditar"
+                                    onclick="editarSocio('${documento.id}')"
+                                    aria-label="Editar socio">
+
+                                    <i class="fa-solid fa-pen"></i>
+
+                                </button>
+
+
+                                <!-- ELIMINAR -->
+
+                                <button
+                                    type="button"
+                                    class="btnEliminar"
+                                    onclick="eliminarSocio('${documento.id}')"
+                                    aria-label="Eliminar socio">
+
+                                    <i class="fa-solid fa-trash"></i>
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error al cargar socios:",
+            error
+        );
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="4">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    Error al cargar los socios
+
+                </td>
+            </tr>
         `;
 
-    });
+    }
 
 }
-window.editarSocio = function(id){
 
-    window.location.href =`editar-socio.html?id=${id}`;
 
-}
+/* =========================================
+   EDITAR SOCIO
+   ========================================= */
+
+window.editarSocio =
+function(id) {
+
+    window.location.href =
+        `editar-socio.html?id=${id}`;
+
+};
+
+
+/* =========================================
+   ELIMINAR SOCIO
+   ========================================= */
+
 window.eliminarSocio =
-async function(id){
+async function(id) {
 
     const confirmar =
     confirm(
         "¿Desea eliminar este socio?"
     );
 
-    if(!confirmar) return;
 
-    try{
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    try {
 
         await deleteDoc(
             doc(
@@ -76,23 +196,34 @@ async function(id){
             )
         );
 
+
         alert(
-            "Socio eliminado"
+            "Socio eliminado correctamente"
         );
+
 
         cargarSocios();
 
     }
-    catch(error){
+    catch (error) {
 
-        console.error(error);
+        console.error(
+            "Error al eliminar:",
+            error
+        );
+
 
         alert(
-            "Error al eliminar"
+            "Error al eliminar el socio"
         );
 
     }
 
-}
+};
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
 
 cargarSocios();

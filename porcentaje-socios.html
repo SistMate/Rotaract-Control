@@ -5,65 +5,136 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
     <title>
         Porcentaje de Asistencia - Socios
     </title>
 
-    <link rel="stylesheet"
-          href="css/porcentajes.css">
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/porcentajes.css">
 
 </head>
 
 <body>
 
-<div class="contenedor">
+    <div class="contenedor">
 
-    <div class="cabecera">
+        <!-- =====================================
+             CABECERA
+             ===================================== -->
 
-        <h1>
-            Porcentaje de Asistencia de Socios
-        </h1>
+        <div class="cabecera">
 
-        <button
-            class="btnVolver"
-            onclick="window.location.href='dashboard.html'">
+            <h1>
 
-            ← Menú Principal
+                <i class="fa-solid fa-chart-pie"></i>
 
-        </button>
+                Porcentaje de Asistencia de Socios
+
+            </h1>
+
+            <button
+                type="button"
+                class="btnVolver"
+                onclick="window.location.href='dashboard.html'">
+
+                <i class="fa-solid fa-caret-left"></i>
+
+                Menú Principal
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             TABLA
+             ===================================== -->
+
+        <div class="tabla-contenedor">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Socio
+
+                        </th>
+
+                        <th>
+
+                            <i class="fa-solid fa-users"></i>
+
+                            Reuniones
+
+                        </th>
+
+                        <th>
+
+                            <i class="fa-solid fa-calendar-check"></i>
+
+                            Actividades
+
+                        </th>
+
+                        <th>
+
+                            <i class="fa-solid fa-chart-line"></i>
+
+                            Porcentaje Total
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody
+                    id="tablaSocios">
+
+                    <tr>
+
+                        <td colspan="4">
+
+                            <i class="fa-solid fa-spinner fa-spin"></i>
+
+                            Cargando asistencia...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 
-    <table>
 
-        <thead>
-
-            <tr>
-
-                <th>Socio</th>
-                <th>Reuniones</th>
-                <th>Actividades</th>
-                <th>Porcentaje Total</th>
-
-            </tr>
-
-        </thead>
-
-        <tbody id="tablaSocios">
-
-        </tbody>
-
-    </table>
-
-</div>
-
-<script
-    type="module"
-    src="js/porcentaje-socios.js">
-</script>
+    <script
+        type="module"
+        src="js/porcentaje-socios.js">
+    </script>
 
 </body>
 

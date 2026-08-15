@@ -1,81 +1,444 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:#d22163;
-    min-height:100vh;
-    padding:30px;
+body {
+
+    min-height: 100vh;
+
+    padding: 30px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #ee468d,
+        #f571ad
+    );
+
+    color: #333;
 }
 
-.contenedor{
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    border-radius:20px;
-    padding:30px;
+
+/* =========================================
+   CONTENEDOR
+   ========================================= */
+
+.contenedor {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 35px;
+
+    background:
+        rgba(255, 254, 254, .97);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
 }
 
-.cabecera{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
+
+.contenedor::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+    height: 650px;
+
+    left: 50%;
+    top: 55%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background-image:
+        url('../img/roto.png');
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: .65;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
-h1{
-    color:#d22163;
+
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.contenedor > * {
+
+    position: relative;
+
+    z-index: 1;
 }
 
-#buscar{
-    width:100%;
-    padding:12px;
-    margin-bottom:20px;
-    border:1px solid #ddd;
-    border-radius:10px;
+
+/* =========================================
+   CABECERA
+   ========================================= */
+
+.cabecera {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
+.cabecera h1 {
+
+    margin-right: auto;
+
+    color: #d22163;
+
+    font-size: 1.8rem;
 }
 
-thead{
-    background:#d22163;
-    color:white;
+
+/* =========================================
+   VOLVER
+   ========================================= */
+
+.btnVolver {
+
+    padding: 11px 18px;
+
+    border: 2px solid #d22163;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #d22163;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    transition: .3s;
 }
 
-th,td{
-    padding:12px;
-    text-align:left;
+.btnVolver:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(210, 33, 99, .25);
 }
 
-tbody tr{
-    border-bottom:1px solid #ddd;
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
+.buscador {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 25px;
+
+    padding: 12px 15px;
+
+    border: 2px solid
+        rgba(210, 33, 99, .30);
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    transition: .3s;
 }
 
-.btnVolver{
-    border:none;
-    background:#6b7280;
-    color:white;
-    padding:10px 20px;
-    border-radius:10px;
-    cursor:pointer;
-}
-.btnEliminar{
-    background:#dc2626;
-    color:white;
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    cursor:pointer;
+.buscador:focus-within {
+
+    background: white;
+
+    border-color: #d22163;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(210, 33, 99, .12);
 }
 
-.btnEliminar:hover{
-    background:#b91c1c;
+.buscador i {
+
+    color: #d22163;
+}
+
+.buscador input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    font-size: .95rem;
+
+    color: #333;
+}
+
+.buscador input::placeholder {
+
+    color: #777;
+}
+
+
+/* =========================================
+   TABLA
+   ========================================= */
+
+.tabla-contenedor {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 14px;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background: rgba(255,255,255,.55);
+}
+
+
+/* =========================================
+   CABECERA TABLA
+   ========================================= */
+
+thead {
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
+
+    color: white;
+}
+
+th {
+
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: .85rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+th i {
+
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   CELDAS
+   ========================================= */
+
+td {
+
+    padding: 14px 15px;
+
+    border-bottom:
+        1px solid
+        rgba(210,33,99,.12);
+
+    font-size: .9rem;
+}
+
+
+/* =========================================
+   FILAS
+   ========================================= */
+
+tbody tr {
+
+    transition: .2s;
+}
+
+tbody tr:hover {
+
+    background:
+        rgba(210,33,99,.06);
+}
+
+
+/* =========================================
+   MONTO
+   ========================================= */
+
+.monto {
+
+    color: #d22163;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================
+   ACCIONES
+   ========================================= */
+
+.acciones {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================================
+   ELIMINAR
+   ========================================= */
+
+.btnEliminar {
+
+    width: 40px;
+
+    height: 40px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: rgba(210,33,99,.10);
+
+    color: #d22163;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: .3s;
+}
+
+.btnEliminar:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(210,33,99,.25);
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 15px;
+    }
+
+    .contenedor {
+
+        padding: 25px 18px;
+    }
+
+    .cabecera {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
+    }
+
+    .cabecera h1 {
+
+        margin-right: 0;
+
+        font-size: 1.5rem;
+    }
+
+    .btnVolver {
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    th,
+    td {
+
+        padding: 12px 10px;
+
+        font-size: .82rem;
+    }
+
 }

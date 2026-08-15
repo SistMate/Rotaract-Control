@@ -9,6 +9,11 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
+/* =========================================
+   ELEMENTOS
+   ========================================= */
+
 const tabla =
 document.getElementById(
     "tablaPagos"
@@ -19,11 +24,21 @@ document.getElementById(
     "buscar"
 );
 
+
+/* =========================================
+   PAGOS
+   ========================================= */
+
 let pagos = [];
 
-async function cargarPagos(){
 
-    try{
+/* =========================================
+   CARGAR PAGOS
+   ========================================= */
+
+async function cargarPagos() {
+
+    try {
 
         const querySnapshot =
         await getDocs(
@@ -33,10 +48,12 @@ async function cargarPagos(){
             )
         );
 
+
         pagos = [];
 
+
         querySnapshot.forEach(
-            (documento)=>{
+            (documento) => {
 
                 pagos.push({
 
@@ -50,40 +67,90 @@ async function cargarPagos(){
             }
         );
 
-        mostrarPagos(
-            pagos
-        );
+
+        mostrarPagos(pagos);
 
     }
-    catch(error){
+    catch (error) {
 
         console.error(
+            "Error al cargar pagos:",
             error
         );
 
-        alert(
-            "Error al cargar pagos"
-        );
+        tabla.innerHTML = `
+            <tr>
+
+                <td colspan="5">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    Error al cargar los pagos
+
+                </td>
+
+            </tr>
+        `;
 
     }
 
 }
 
-function mostrarPagos(lista){
+
+/* =========================================
+   MOSTRAR PAGOS
+   ========================================= */
+
+function mostrarPagos(lista) {
 
     tabla.innerHTML = "";
 
+
+    /* =====================================
+       SIN RESULTADOS
+       ===================================== */
+
+    if (lista.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+
+                <td colspan="5">
+
+                    <i class="fa-solid fa-receipt"></i>
+
+                    No se encontraron pagos
+
+                </td>
+
+            </tr>
+        `;
+
+        return;
+
+    }
+
+
+    /* =====================================
+       RECORRER PAGOS
+       ===================================== */
+
     lista.forEach(
-        (pago)=>{
+        (pago) => {
 
             let fechaFormateada = "";
 
-            if(pago.fecha){
 
-                if(
+            /* =================================
+               FORMATEAR FECHA
+               ================================= */
+
+            if (pago.fecha) {
+
+                if (
                     typeof pago.fecha.toDate ===
                     "function"
-                ){
+                ) {
 
                     fechaFormateada =
                     pago.fecha
@@ -93,7 +160,7 @@ function mostrarPagos(lista){
                     );
 
                 }
-                else{
+                else {
 
                     fechaFormateada =
                     pago.fecha;
@@ -102,40 +169,66 @@ function mostrarPagos(lista){
 
             }
 
+
+            /* =================================
+               CONCEPTO
+               ================================= */
+
+            const concepto =
+            pago.conceptoPago ||
+            pago.motivoPago ||
+            "";
+
+
+            /* =================================
+               TABLA
+               ================================= */
+
             tabla.innerHTML += `
-            <tr>
 
-                <td>
-                    ${pago.nombreSocio || ""}
-                </td>
+                <tr>
 
-                <td>
-                    ${fechaFormateada}
-                </td>
+                    <td>
+                        ${pago.nombreSocio || ""}
+                    </td>
 
-                <td>
-                    ${pago.conceptoPago ||
-                      pago.motivoPago ||
-                      ""}
-                </td>
+                    <td>
+                        ${fechaFormateada}
+                    </td>
 
-                <td>
-                    Bs ${pago.montoPagado || 0}
-                </td>
+                    <td>
+                        ${concepto}
+                    </td>
 
-                <td>
+                    <td class="monto">
 
-                    <button
-                        class="btnEliminar"
-                        onclick="eliminarPago('${pago.id}')">
+                        Bs ${pago.montoPagado || 0}
 
-                        Eliminar
+                    </td>
 
-                    </button>
 
-                </td>
+                    <!-- ACCIÓN -->
 
-            </tr>
+                    <td>
+
+                        <div class="acciones">
+
+                            <button
+                                type="button"
+                                class="btnEliminar"
+                                onclick="eliminarPago('${pago.id}')"
+                                aria-label="Eliminar pago">
+
+                                <i class="fa-solid fa-trash"></i>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
             `;
 
         }
@@ -143,18 +236,24 @@ function mostrarPagos(lista){
 
 }
 
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
 buscar.addEventListener(
     "keyup",
-    (e)=>{
+    (e) => {
 
         const texto =
         e.target.value
         .toLowerCase()
         .trim();
 
+
         const filtrados =
         pagos.filter(
-            (pago)=>{
+            (pago) => {
 
                 const nombre =
                 (
@@ -162,6 +261,7 @@ buscar.addEventListener(
                     ""
                 )
                 .toLowerCase();
+
 
                 const motivo =
                 (
@@ -171,18 +271,20 @@ buscar.addEventListener(
                 )
                 .toLowerCase();
 
+
                 return (
-                    nombre.includes(
-                        texto
-                    )
+
+                    nombre.includes(texto)
+
                     ||
-                    motivo.includes(
-                        texto
-                    )
+
+                    motivo.includes(texto)
+
                 );
 
             }
         );
+
 
         mostrarPagos(
             filtrados
@@ -191,21 +293,28 @@ buscar.addEventListener(
     }
 );
 
+
+/* =========================================
+   ELIMINAR PAGO
+   ========================================= */
+
 window.eliminarPago =
-async function(id){
+async function(id) {
 
     const confirmar =
     confirm(
         "¿Desea eliminar este pago?"
     );
 
-    if(!confirmar){
+
+    if (!confirmar) {
 
         return;
 
     }
 
-    try{
+
+    try {
 
         await deleteDoc(
             doc(
@@ -215,18 +324,22 @@ async function(id){
             )
         );
 
+
         alert(
             "Pago eliminado correctamente"
         );
 
+
         cargarPagos();
 
     }
-    catch(error){
+    catch (error) {
 
         console.error(
+            "Error al eliminar:",
             error
         );
+
 
         alert(
             "Error al eliminar el pago"
@@ -234,6 +347,11 @@ async function(id){
 
     }
 
-}
+};
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
 
 cargarPagos();

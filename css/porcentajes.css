@@ -1,65 +1,490 @@
+/* =========================================
+   FUENTE
+   ========================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:#d22163;
-    min-height:100vh;
-    padding:30px;
+
+/* =========================================
+   BODY
+   ========================================= */
+
+body {
+
+    min-height: 100vh;
+
+    padding: 30px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #ee468d,
+        #f571ad
+    );
+
+    color: #333;
 }
 
-.contenedor{
-    max-width:1200px;
-    margin:auto;
-    background:white;
-    border-radius:20px;
-    padding:30px;
+
+/* =========================================
+   CONTENEDOR
+   ========================================= */
+
+.contenedor {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    padding: 35px;
+
+    background:
+        rgba(255, 254, 254, .97);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
 }
 
-.cabecera{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
+
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
+
+.contenedor::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 650px;
+
+    height: 650px;
+
+    left: 50%;
+
+    top: 55%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background-image:
+        url('../img/roto.png');
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: .65;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
-h1{
-    color:#d22163;
+
+/* =========================================
+   CONTENIDO
+   ========================================= */
+
+.contenedor > * {
+
+    position: relative;
+
+    z-index: 1;
 }
 
-table{
-    width:100%;
-    border-collapse:collapse;
+
+/* =========================================
+   CABECERA
+   ========================================= */
+
+.cabecera {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
 }
 
-thead{
-    background:#d22163;
-    color:white;
+
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.cabecera h1 {
+
+    margin-right: auto;
+
+    color: #d22163;
+
+    font-size: 1.7rem;
+
+    font-weight: 700;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 }
 
-th,td{
-    padding:14px;
-    text-align:left;
+
+.cabecera h1 i {
+
+    font-size: 1.5rem;
 }
 
-tbody tr{
-    border-bottom:1px solid #ddd;
+
+/* =========================================
+   BOTÓN VOLVER
+   ========================================= */
+
+.btnVolver {
+
+    padding: 11px 18px;
+
+    border: 2px solid #d22163;
+
+    border-radius: 12px;
+
+    background: transparent;
+
+    color: #d22163;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    white-space: nowrap;
+
+    transition: .3s;
 }
 
-tbody tr:hover{
-    background:#f4f6f8;
+
+.btnVolver:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px
+        rgba(210, 33, 99, .25);
 }
 
-.btnVolver{
-    border:none;
-    background:#6b7280;
-    color:white;
-    padding:10px 20px;
-    border-radius:10px;
-    cursor:pointer;
+
+/* =========================================
+   TABLA
+   ========================================= */
+
+.tabla-contenedor {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    border-radius: 14px;
+}
+
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background:
+        rgba(255,255,255,.55);
+}
+
+
+/* =========================================
+   ENCABEZADO
+   ========================================= */
+
+thead {
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
+
+    color: white;
+}
+
+
+th {
+
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: .85rem;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+th i {
+
+    margin-right: 6px;
+}
+
+
+/* =========================================
+   CELDAS
+   ========================================= */
+
+td {
+
+    padding: 15px;
+
+    border-bottom:
+        1px solid
+        rgba(210,33,99,.12);
+
+    font-size: .9rem;
+}
+
+
+/* =========================================
+   FILAS
+   ========================================= */
+
+tbody tr {
+
+    transition: .2s;
+}
+
+
+tbody tr:hover {
+
+    background:
+        rgba(210,33,99,.06);
+}
+
+
+/* =========================================
+   COLUMNA SOCIO
+   ========================================= */
+
+td:first-child {
+
+    font-weight: 600;
+
+    color: #333;
+}
+
+
+/* =========================================
+   REUNIONES / ACTIVIDADES
+   ========================================= */
+
+td:nth-child(2),
+td:nth-child(3) {
+
+    color: #555;
+
+    font-weight: 500;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   PORCENTAJE
+   ========================================= */
+
+td:last-child {
+
+    min-width: 180px;
+
+    color: #d22163;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BARRA DE PORCENTAJE
+   ========================================= */
+
+.porcentaje-contenedor {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.barra {
+
+    flex: 1;
+
+    height: 9px;
+
+    background:
+        rgba(210,33,99,.12);
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    min-width: 70px;
+}
+
+
+.barra-progreso {
+
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #d22163,
+        #ee468d
+    );
+
+    border-radius: 20px;
+
+    transition:
+        width .6s ease;
+}
+
+
+.porcentaje-texto {
+
+    min-width: 50px;
+
+    text-align: right;
+
+    color: #d22163;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CARGANDO / SIN DATOS / ERROR
+   ========================================= */
+
+td[colspan] {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #777;
+}
+
+
+td[colspan] i {
+
+    color: #d22163;
+
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 750px) {
+
+    body {
+
+        padding: 15px;
+    }
+
+
+    .contenedor {
+
+        padding: 25px 18px;
+    }
+
+
+    .cabecera {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+        text-align: center;
+    }
+
+
+    .cabecera h1 {
+
+        margin-right: 0;
+
+        justify-content: center;
+
+        font-size: 1.45rem;
+    }
+
+
+    .btnVolver {
+
+        width: 100%;
+    }
+
+
+    th,
+    td {
+
+        padding: 12px 10px;
+
+        font-size: .82rem;
+    }
+
 }

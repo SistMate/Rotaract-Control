@@ -1,119 +1,236 @@
 /* Importar fuente */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+
     background: linear-gradient(
-    135deg,
-    #d22163,
-    #ee468d,
-    #f571ad
-   );
+        135deg,
+        #d22163,
+        #ee468d,
+        #f571ad
+    );
 }
 
-.login-container{
+/* Contenedor */
+.login-container {
     width: 100%;
     max-width: 420px;
     padding: 20px;
 }
 
-.login-card{
-    background: rgba(255,255,255,0.97);
+/* Tarjeta */
+.login-card {
+    position: relative;
+    overflow: hidden;
+
+    background: rgba(255, 254, 254, 0.97);
     backdrop-filter: blur(10px);
+
     border-radius: 20px;
     padding: 40px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+
+    box-shadow: 0 15px 40px rgba(0, 0, 0, .25);
 }
 
-.logo{
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
+
+.login-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 420px;
+    height: 420px;
+
+    left: 50%;
+    top: 55%;
+
+    transform: translate(-50%, -50%);
+
+    background-image: url('../img/roto.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+
+    opacity: 0.50;
+
+    z-index: 0;
+
+    pointer-events: none;
+}
+
+/* Todo el contenido queda encima */
+.login-card > * {
+    position: relative;
+    z-index: 1;
+}
+/* =========================================
+   LOGO
+   ========================================= */
+
+.logo {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.logo img{
+.logo img {
     width: 250px;
     height: auto;
     margin-bottom: 10px;
 }
 
-.logo h1{
+.logo h1 {
     margin-top: 10px;
+
     color: #d22163;
+
     font-size: 1.6rem;
+    font-weight: 700;
 }
 
-.logo p{
+.logo p {
     color: #777;
     font-size: .9rem;
 }
 
-.form-group{
+/* =========================================
+   FORMULARIO
+   ========================================= */
+
+.form-group {
     margin-bottom: 18px;
 }
 
-.form-group label{
-    display: block;
-    margin-bottom: 6px;
-    font-size: .9rem;
-    color: #444;
-    font-weight: 500;
-}
-
-.form-group input{
+.form-group input {
     width: 100%;
     padding: 14px;
-    border: 2px solid #e0e0e0;
+
+    background: transparent;
+
+    border: 2px solid rgba(210, 33, 99, 0.35);
     border-radius: 12px;
+
     outline: none;
-    transition: .3s;
+
     font-size: .95rem;
+    color: #333;
+
+    transition: 
+        background 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
-.form-group input:focus{
-    border-color: #005daa;
-    box-shadow: 0 0 0 4px rgba(0,93,170,.15);
+/* Placeholder */
+.form-group input::placeholder {
+    color: #777;
 }
 
-.btn-login{
+/* Al hacer click */
+.form-group input:focus {
+    background: #ffffff;
+
+    border-color: #d22163;
+
+    box-shadow:
+        0 0 0 4px rgba(210, 33, 99, 0.12);
+}
+.form-group label {
+    color: #000000;
+}
+/* =========================================
+   BOTÓN
+   ========================================= */
+
+.btn-login {
     width: 100%;
+
     border: none;
+
     background: linear-gradient(
-    135deg,
-    #d22163,
-    #e84b86
+        135deg,
+        #d22163,
+        #e84b86
     );
+
     color: white;
+
     padding: 14px;
+
     border-radius: 12px;
+
     cursor: pointer;
+
     font-size: 1rem;
     font-weight: 600;
+
     transition: .3s;
 }
 
-.btn-login:hover{
+.btn-login:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(0,93,170,.3);
+
+    box-shadow:
+        0 10px 20px rgba(210, 33, 99, .3);
 }
 
-.footer{
+.btn-login:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   FOOTER
+   ========================================= */
+
+.footer {
     margin-top: 20px;
+
     text-align: center;
+
     color: #535353;
+
     font-size: .8rem;
 }
 
-.version{
+.version {
     margin-top: 5px;
-    color: #bbb;
+
+    color: #aaa;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .login-container {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 30px 25px;
+    }
+
+    .logo img {
+        width: 210px;
+    }
+
+    .logo h1 {
+        font-size: 1.4rem;
+    }
+
 }

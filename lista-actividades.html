@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Actividades Registradas
+    </title>
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/actividades.css">
+
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <!-- =====================================
+             CABECERA
+             ===================================== -->
+
+        <div class="cabecera">
+
+            <div>
+
+                <h1>
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Actividades Registradas
+
+                </h1>
+
+                <p>
+                    Consulta las actividades y su asistencia
+                </p>
+
+            </div>
+
+            <button
+                class="btnVolver"
+                onclick="window.location.href='dashboard.html'">
+
+                <i class="fa-solid fa-caret-left"></i>
+
+                Menú Principal
+
+            </button>
+
+        </div>
+
+
+        <!-- =====================================
+             LISTA DE ACTIVIDADES
+             ===================================== -->
+
+        <div
+            id="listaActividades"
+            class="lista-actividades">
+
+            <div class="cargando">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                Cargando actividades...
+
+            </div>
+
+        </div>
+
+
+        <!-- =====================================
+             DETALLE DE ACTIVIDAD
+             ===================================== -->
+
+        <div
+            id="detalleActividad"
+            class="detalle-actividad"
+            style="display:none;">
+
+            <div class="detalle-cabecera">
+
+                <button
+                    id="btnVolverActividades"
+                    class="btnVolverDetalle">
+
+                    <i class="fa-solid fa-caret-left"></i>
+
+                    Volver a actividades
+
+                </button>
+
+                <h2 id="tituloActividad">
+                    Actividad
+                </h2>
+
+                <p id="fechaActividad">
+                    Fecha
+                </p>
+
+            </div>
+
+
+            <!-- =================================
+                 RESUMEN
+                 ================================= -->
+
+            <div class="resumen">
+
+                <div class="resumen-card">
+
+                    <i class="fa-solid fa-user-group"></i>
+
+                    <div>
+
+                        <span>
+                            Socios
+                        </span>
+
+                        <strong id="totalSocios">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="resumen-card">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <div>
+
+                        <span>
+                            Simpatizantes
+                        </span>
+
+                        <strong id="totalSimpatizantes">
+                            0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 ASISTENCIA SOCIOS
+                 ================================= -->
+
+            <div class="asistencia-seccion">
+
+                <div class="seccion-titulo">
+
+                    <i class="fa-solid fa-user-check"></i>
+
+                    <h3>
+                        Asistencia de Socios
+                    </h3>
+
+                </div>
+
+                <div
+                    id="listaAsistenciaSocios"
+                    class="lista-asistencia">
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 ASISTENCIA SIMPATIZANTES
+                 ================================= -->
+
+            <div class="asistencia-seccion">
+
+                <div class="seccion-titulo">
+
+                    <i class="fa-solid fa-people-group"></i>
+
+                    <h3>
+                        Asistencia de Simpatizantes
+                    </h3>
+
+                </div>
+
+                <div
+                    id="listaAsistenciaSimpatizantes"
+                    class="lista-asistencia">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script
+        type="module"
+        src="js/lista-actividades.js">
+    </script>
+
+</body>
+
+</html>

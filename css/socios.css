@@ -1,254 +1,592 @@
+/* =========================================
+   FUENTE
+   ========================================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+
+/* =========================================
+   FONT AWESOME
+   ========================================= */
+
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+
+
+/* =========================================
+   RESET
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
 
-    min-height:100vh;
+/* =========================================
+   BODY
+   ========================================= */
 
-    background:#d22163;
+body {
 
-    padding:30px;
+    min-height: 100vh;
+
+    padding: 30px 20px;
+
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #ee468d,
+        #f571ad
+    );
+
+    color: #333;
 }
 
-.contenedor{
 
-    max-width:1200px;
+/* =========================================
+   CONTENEDOR
+   ========================================= */
 
-    margin:auto;
+.contenedor {
 
-    background:white;
+    position: relative;
 
-    border-radius:20px;
+    width: 100%;
 
-    padding:30px;
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 35px;
+
+    background: rgba(255, 254, 254, .97);
+
+    backdrop-filter: blur(10px);
+
+    border-radius: 20px;
 
     box-shadow:
-    0 15px 40px rgba(0,0,0,.15);
+        0 15px 40px rgba(0, 0, 0, .25);
+
+    overflow: hidden;
 }
 
-.cabecera{
 
-    display:flex;
+/* =========================================
+   MARCA DE AGUA
+   ========================================= */
 
-    justify-content:space-between;
+.contenedor::before {
 
-    align-items:center;
+    content: "";
 
-    margin-bottom:25px;
+    position: absolute;
 
-    flex-wrap:wrap;
+    width: 600px;
 
-    gap:15px;
+    height: 600px;
+
+    left: 50%;
+
+    top: 55%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background-image:
+        url('../img/roto.png');
+
+    background-repeat: no-repeat;
+
+    background-position: center;
+
+    background-size: contain;
+
+    opacity: .65;
+
+    z-index: 0;
+
+    pointer-events: none;
 }
 
-h1{
 
-    color:#d22163;
+/* =========================================
+   CONTENIDO SOBRE MARCA DE AGUA
+   ========================================= */
 
-    font-size:2rem;
+.contenedor > * {
+
+    position: relative;
+
+    z-index: 1;
 }
 
-.btnNuevo{
 
-    border:none;
+/* =========================================
+   CABECERA
+   ========================================= */
 
-    background:
-    linear-gradient(
-    135deg,
-    #d22163,
-    #e84b86
-); 
+.cabecera {
 
-    color:white;
+    display: flex;
 
-    padding:12px 20px;
+    align-items: center;
 
-    border-radius:12px;
+    gap: 12px;
 
-    cursor:pointer;
+    margin-bottom: 30px;
 
-    font-weight:600;
-
-    transition:.3s;
+    flex-wrap: wrap;
 }
 
-.btnNuevo:hover{
 
-    transform:translateY(-2px);
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.cabecera h1 {
+
+    margin-right: auto;
+
+    color: #d22163;
+
+    font-size: 1.8rem;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   BOTONES
+   ========================================= */
+
+.cabecera button {
+
+    border-radius: 12px;
+
+    padding: 11px 18px;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: .9rem;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+}
+
+
+/* =========================================
+   BOTÓN VOLVER
+   ========================================= */
+
+.btnVolver {
+
+    background: transparent;
+
+    color: #d22163;
+
+    border: 2px solid #d22163;
+}
+
+
+.btnVolver:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
 
     box-shadow:
-    0 10px 20px rgba(34,197,94,.25);
+        0 7px 15px rgba(210, 33, 99, .25);
 }
 
-.btnVolver{
 
-    border:none;
+/* =========================================
+   BOTÓN NUEVO SOCIO
+   ========================================= */
 
-    background:#6b7280;
+.btnNuevo {
 
-    color:white;
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
 
-    padding:12px 20px;
+    color: white;
 
-    border-radius:12px;
+    border: none;
 
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.3s;
+    box-shadow:
+        0 5px 12px rgba(210, 33, 99, .18);
 }
 
-.btnVolver:hover{
 
-    background:#4b5563;
+.btnNuevo:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 20px rgba(210, 33, 99, .30);
 }
 
-.tabla-container{
 
-    overflow-x:auto;
+/* =========================================
+   TABLA
+   ========================================= */
+
+table {
+
+    width: 100%;
+
+    border-collapse: separate;
+
+    border-spacing: 0;
+
+    overflow: hidden;
+
+    border-radius: 15px;
+
+    border:
+        2px solid rgba(210, 33, 99, .15);
+
+    background: rgba(255, 255, 255, .35);
 }
 
-table{
 
-    width:100%;
+/* =========================================
+   ENCABEZADO TABLA
+   ========================================= */
 
-    border-collapse:collapse;
+thead {
 
-    min-width:700px;
+    background: linear-gradient(
+        135deg,
+        #d22163,
+        #e84b86
+    );
+
+    color: white;
 }
 
-thead{
 
-    background:#d22163;
+th {
 
-    color:white;
+    padding: 15px;
+
+    text-align: left;
+
+    font-size: .88rem;
+
+    font-weight: 600;
 }
 
-thead th{
 
-    padding:15px;
+/* =========================================
+   CELDAS
+   ========================================= */
 
-    text-align:left;
-}
+td {
 
-tbody tr{
+    padding: 14px 15px;
 
     border-bottom:
-    1px solid #e5e7eb;
+        1px solid rgba(210, 33, 99, .12);
 
-    transition:.2s;
+    color: #444;
+
+    font-size: .88rem;
+
+    background: rgba(255, 255, 255, .30);
 }
 
-tbody tr:hover{
 
-    background:#f8fafc;
+/* =========================================
+   ÚLTIMA FILA
+   ========================================= */
+
+tbody tr:last-child td {
+
+    border-bottom: none;
 }
 
-tbody td{
 
-    padding:14px;
+/* =========================================
+   HOVER FILA
+   ========================================= */
+
+tbody tr {
+
+    transition: .25s;
 }
 
-.estado-activo{
 
-    background:#dcfce7;
+tbody tr:hover {
 
-    color:#166534;
+    background:
+        rgba(210, 33, 99, .06);
 
-    padding:5px 12px;
-
-    border-radius:20px;
-
-    font-size:.85rem;
-
-    font-weight:600;
+    transform: scale(1.002);
 }
 
-.estado-inactivo{
 
-    background:#fee2e2;
+/* =========================================
+   COLUMNA ACCIÓN
+   ========================================= */
 
-    color:#991b1b;
+th:last-child,
+td:last-child {
 
-    padding:5px 12px;
-
-    border-radius:20px;
-
-    font-size:.85rem;
-
-    font-weight:600;
+    text-align: center;
 }
 
-.btnEditar{
 
-    border:none;
+/* =========================================
+   BOTONES DE ACCIÓN
+   ========================================= */
 
-    background:#f59e0b;
+td button {
 
-    color:white;
+    width: 38px;
 
-    padding:8px 12px;
+    height: 38px;
 
-    border-radius:8px;
+    border: none;
 
-    cursor:pointer;
+    border-radius: 10px;
 
-    margin-right:5px;
+    cursor: pointer;
+
+    margin: 2px;
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: .95rem;
+
+    transition: .25s;
 }
 
-.btnEliminar{
 
-    border:none;
+/* =========================================
+   BOTÓN EDITAR
+   ========================================= */
 
-    background:#dc2626;
+.btnEditar {
 
-    color:white;
+    background: rgba(210, 33, 99, .10);
 
-    padding:8px 12px;
+    color: #d22163;
 
-    border-radius:8px;
-
-    cursor:pointer;
+    border: 1px solid rgba(210, 33, 99, .20);
 }
 
-.btnEditar:hover,
-.btnEliminar:hover{
 
-    opacity:.9;
+.btnEditar:hover {
+
+    background: #d22163;
+
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(210, 33, 99, .25);
 }
 
-.acciones{
 
-    display:flex;
+/* =========================================
+   BOTÓN ELIMINAR
+   ========================================= */
 
-    gap:5px;
+.btnEliminar {
+
+    background: rgba(220, 53, 69, .10);
+
+    color: #dc3545;
+
+    border: 1px solid rgba(220, 53, 69, .20);
 }
 
-@media(max-width:768px){
 
-    .cabecera{
+.btnEliminar:hover {
 
-        flex-direction:column;
+    background: #dc3545;
 
-        align-items:stretch;
+    color: white;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(220, 53, 69, .25);
+}
+
+
+/* =========================================
+   BOTÓN VER
+   ========================================= */
+
+.btnVer {
+
+    background: rgba(13, 110, 253, .10);
+
+    color: #0d6efd;
+
+    border: 1px solid rgba(13, 110, 253, .20);
+}
+
+
+.btnVer:hover {
+
+    background: #0d6efd;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   FONT AWESOME
+   ========================================= */
+
+td button i {
+
+    font-size: 1rem;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   MENSAJE SIN SOCIOS
+   ========================================= */
+
+#tablaSocios td[colspan] {
+
+    text-align: center;
+
+    padding: 35px;
+
+    color: #888;
+
+    font-size: .95rem;
+}
+
+
+/* =========================================
+   SCROLL HORIZONTAL
+   ========================================= */
+
+.contenedor {
+
+    overflow-x: auto;
+}
+
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+
+@media (max-width: 800px) {
+
+    body {
+
+        padding: 15px;
     }
 
-    h1{
 
-        text-align:center;
+    .contenedor {
+
+        padding: 25px 18px;
     }
 
-    .btnNuevo,
-    .btnVolver{
 
-        width:100%;
+    .cabecera {
+
+        flex-direction: column;
+
+        align-items: stretch;
+    }
+
+
+    .cabecera h1 {
+
+        text-align: center;
+
+        margin-right: 0;
+
+        margin-bottom: 10px;
+    }
+
+
+    .cabecera button {
+
+        width: 100%;
+    }
+
+
+    table {
+
+        min-width: 700px;
+    }
+
+}
+
+
+/* =========================================
+   MÓVIL
+   ========================================= */
+
+@media (max-width: 480px) {
+
+    .contenedor {
+
+        padding: 20px 15px;
+
+        border-radius: 16px;
+    }
+
+
+    .cabecera h1 {
+
+        font-size: 1.45rem;
+    }
+
+
+    th,
+    td {
+
+        padding: 11px;
+
+        font-size: .8rem;
+    }
+
+
+    td button {
+
+        width: 34px;
+
+        height: 34px;
     }
 
 }

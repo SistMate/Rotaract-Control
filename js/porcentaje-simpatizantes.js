@@ -7,124 +7,297 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+
 const tabla =
 document.getElementById(
     "tablaSimpatizantes"
 );
 
-async function cargarDatos(){
 
-    const simpatizantesSnap =
-    await getDocs(
-        collection(db,"Simpatizante")
-    );
+/* =========================================
+   CARGAR DATOS
+   ========================================= */
 
-    const reunionesSnap =
-    await getDocs(
-        collection(db,"Reunion")
-    );
+async function cargarDatos() {
 
-    const actividadesSnap =
-    await getDocs(
-        collection(db,"Actividad")
-    );
+    try {
 
-    const totalReuniones =
-    reunionesSnap.size;
+        /* =====================================
+           SIMPATIZANTES
+           ===================================== */
 
-    const totalActividades =
-    actividadesSnap.size;
+        const simpatizantesSnap =
+        await getDocs(
+            collection(
+                db,
+                "Simpatizante"
+            )
+        );
 
-    simpatizantesSnap.forEach(
-        (docSimpatizante)=>{
 
-            const simpatizante =
-            docSimpatizante.data();
+        /* =====================================
+           REUNIONES
+           ===================================== */
 
-            const nombre =
-            simpatizante.NombreSimpatizante;
+        const reunionesSnap =
+        await getDocs(
+            collection(
+                db,
+                "Reunion"
+            )
+        );
 
-            let reunionesAsistidas = 0;
-            let actividadesAsistidas = 0;
 
-            reunionesSnap.forEach(
-                (reunion)=>{
+        /* =====================================
+           ACTIVIDADES
+           ===================================== */
 
-                    const datos =
-                    reunion.data();
+        const actividadesSnap =
+        await getDocs(
+            collection(
+                db,
+                "Actividad"
+            )
+        );
 
-                    if(
-                        datos.asistenciaSimpatizantes &&
-                        datos.asistenciaSimpatizantes.includes(nombre)
-                    ){
-                        reunionesAsistidas++;
+
+        const totalReuniones =
+        reunionesSnap.size;
+
+
+        const totalActividades =
+        actividadesSnap.size;
+
+
+        tabla.innerHTML = "";
+
+
+        /* =====================================
+           SI NO HAY SIMPATIZANTES
+           ===================================== */
+
+        if (simpatizantesSnap.empty) {
+
+            tabla.innerHTML = `
+
+                <tr>
+
+                    <td colspan="4">
+
+                        <i class="fa-solid fa-user-slash"></i>
+
+                        No hay simpatizantes registrados
+
+                    </td>
+
+                </tr>
+
+            `;
+
+            return;
+        }
+
+
+        /* =====================================
+           RECORRER SIMPATIZANTES
+           ===================================== */
+
+        simpatizantesSnap.forEach(
+            (docSimpatizante) => {
+
+                const simpatizante =
+                docSimpatizante.data();
+
+
+                const nombre =
+                simpatizante.NombreSimpatizante;
+
+
+                let reunionesAsistidas = 0;
+
+                let actividadesAsistidas = 0;
+
+
+                /* =================================
+                   REUNIONES
+                   ================================= */
+
+                reunionesSnap.forEach(
+                    (reunion) => {
+
+                        const datos =
+                        reunion.data();
+
+
+                        if (
+                            datos.asistenciaSimpatizantes &&
+                            datos.asistenciaSimpatizantes.includes(nombre)
+                        ) {
+
+                            reunionesAsistidas++;
+
+                        }
+
                     }
+                );
 
-                }
-            );
 
-            actividadesSnap.forEach(
-                (actividad)=>{
+                /* =================================
+                   ACTIVIDADES
+                   ================================= */
 
-                    const datos =
-                    actividad.data();
+                actividadesSnap.forEach(
+                    (actividad) => {
 
-                    if(
-                        datos.asistenciaSimpatizantes &&
-                        datos.asistenciaSimpatizantes.includes(nombre)
-                    ){
-                        actividadesAsistidas++;
+                        const datos =
+                        actividad.data();
+
+
+                        if (
+                            datos.asistenciaSimpatizantes &&
+                            datos.asistenciaSimpatizantes.includes(nombre)
+                        ) {
+
+                            actividadesAsistidas++;
+
+                        }
+
                     }
+                );
 
-                }
-            );
 
-            const totalEventos =
-            totalReuniones +
-            totalActividades;
+                /* =================================
+                   CALCULAR PORCENTAJE
+                   ================================= */
 
-            const asistencias =
-            reunionesAsistidas +
-            actividadesAsistidas;
+                const totalEventos =
+                totalReuniones +
+                totalActividades;
 
-            const porcentaje =
-            totalEventos > 0
-            ?
-            (
-                asistencias
-                /
-                totalEventos
-            ) * 100
-            :
-            0;
 
-            tabla.innerHTML += `
+                const asistencias =
+                reunionesAsistidas +
+                actividadesAsistidas;
+
+
+                const porcentaje =
+                totalEventos > 0
+                ?
+                (
+                    asistencias /
+                    totalEventos
+                ) * 100
+                :
+                0;
+
+
+                const porcentajeRedondeado =
+                porcentaje.toFixed(1);
+
+
+                /* =================================
+                   MOSTRAR EN TABLA
+                   ================================= */
+
+                tabla.innerHTML += `
+
+                    <tr>
+
+                        <td>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            ${nombre || ""}
+
+                        </td>
+
+
+                        <td>
+
+                            ${reunionesAsistidas}
+
+                            /
+
+                            ${totalReuniones}
+
+                        </td>
+
+
+                        <td>
+
+                            ${actividadesAsistidas}
+
+                            /
+
+                            ${totalActividades}
+
+                        </td>
+
+
+                        <td>
+
+                            <div class="porcentaje-contenedor">
+
+                                <div class="barra">
+
+                                    <div
+                                        class="barra-progreso"
+                                        style="width:${porcentaje}%">
+
+                                    </div>
+
+                                </div>
+
+                                <span
+                                    class="porcentaje-texto">
+
+                                    ${porcentajeRedondeado}%
+
+                                </span>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Error al cargar asistencia:",
+            error
+        );
+
+
+        tabla.innerHTML = `
+
             <tr>
 
-                <td>${nombre}</td>
+                <td colspan="4">
 
-                <td>
-                    ${reunionesAsistidas}
-                    /
-                    ${totalReuniones}
-                </td>
+                    <i class="fa-solid fa-circle-exclamation"></i>
 
-                <td>
-                    ${actividadesAsistidas}
-                    /
-                    ${totalActividades}
-                </td>
+                    Error al cargar los datos de asistencia
 
-                <td>
-                    ${porcentaje.toFixed(1)}%
                 </td>
 
             </tr>
-            `;
 
-        }
-    );
+        `;
+
+    }
 
 }
+
+
+/* =========================================
+   INICIAR
+   ========================================= */
 
 cargarDatos();
