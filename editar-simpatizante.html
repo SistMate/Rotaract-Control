@@ -9,14 +9,18 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>Editar Simpatizante</title>
+    <title>
+        Editar Simpatizante
+    </title>
 
     <!-- FONT AWESOME -->
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <!-- CSS -->
+
     <link
         rel="stylesheet"
         href="css/formularios.css">
@@ -31,26 +35,13 @@
 
         <div class="cabecera">
 
-            <div class="titulo">
+            <h1>
 
                 <i class="fa-solid fa-user-pen"></i>
 
-                <h1>
-                    Editar Simpatizante
-                </h1>
+                Editar Simpatizante
 
-            </div>
-
-            <button
-                type="button"
-                class="btnVolver"
-                onclick="window.location.href='simpatizantes.html'">
-
-                <i class="fa-solid fa-caret-left"></i>
-
-                Volver
-
-            </button>
+            </h1>
 
         </div>
 
@@ -59,11 +50,16 @@
 
         <form id="formEditar">
 
+            <!-- NOMBRE -->
+
             <div class="grupo">
 
                 <label for="nombre">
+
                     <i class="fa-solid fa-user"></i>
+
                     Nombre Completo
+
                 </label>
 
                 <input
@@ -75,11 +71,16 @@
             </div>
 
 
+            <!-- CELULAR -->
+
             <div class="grupo">
 
                 <label for="celular">
-                    <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    <i class="fa-solid fa-phone"></i>
+
                     Celular
+
                 </label>
 
                 <input
@@ -90,11 +91,16 @@
             </div>
 
 
+            <!-- FECHA -->
+
             <div class="grupo">
 
                 <label for="fechaIngreso">
+
                     <i class="fa-solid fa-calendar-days"></i>
+
                     Fecha de Ingreso
+
                 </label>
 
                 <input
@@ -103,6 +109,8 @@
 
             </div>
 
+
+            <!-- GUARDAR -->
 
             <button
                 type="submit"
@@ -116,8 +124,28 @@
 
         </form>
 
+
+        <!-- BOTÓN VOLVER -->
+
+        <div class="botones">
+
+            <button
+                type="button"
+                class="btnVolver"
+                onclick="window.location.href='simpatizantes.html'">
+
+                <i class="fa-solid fa-caret-left"></i>
+
+                Volver a Simpatizantes
+
+            </button>
+
+        </div>
+
     </div>
 
+
+    <!-- JAVASCRIPT -->
 
     <script
         type="module"
