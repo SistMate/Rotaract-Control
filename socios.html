@@ -5,14 +5,21 @@
 
     <meta charset="UTF-8">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>
         Lista de Socios
     </title>
 
+    <!-- CSS -->
     <link
         rel="stylesheet"
         href="css/socios.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 </head>
 
@@ -20,31 +27,52 @@
 
     <div class="contenedor">
 
+        <!-- CABECERA -->
         <div class="cabecera">
 
             <h1>
                 Lista de Socios
             </h1>
-            
-            <button
-                class="btnVolver"
-                onclick="window.location.href='dashboard.html'">
 
-                <i class="fas fa-caret-left"></i>
-                Menú Principal
+            <div class="botones">
+
+                <button
+                    class="btnVolver"
+                    onclick="window.location.href='dashboard.html'">
+
+                    <i class="fas fa-caret-left"></i>
+                    Menú Principal
 
                 </button>
-            <button
-                class="btnNuevo"
-                onclick="window.location.href='registrar-socios.html'">
 
-                <i class="fas fa-plus"></i>
-                Nuevo Socio
+                <button
+                    class="btnNuevo"
+                    onclick="window.location.href='registrar-socios.html'">
 
-            </button>
+                    <i class="fas fa-plus"></i>
+                    Nuevo Socio
+
+                </button>
+
+            </div>
 
         </div>
 
+
+        <!-- BUSCADOR -->
+        <div class="buscador">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="buscarSocio"
+                placeholder="Buscar socio...">
+
+        </div>
+
+
+        <!-- TABLA -->
         <table>
 
             <thead>
@@ -73,12 +101,16 @@
 
             <tbody id="tablaSocios">
 
+                <!-- Los socios se cargarán desde Firebase -->
+
             </tbody>
 
         </table>
 
     </div>
 
+
+    <!-- JAVASCRIPT -->
     <script
         type="module"
         src="js/socios.js">
