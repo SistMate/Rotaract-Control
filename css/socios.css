@@ -17,12 +17,15 @@
    ========================================= */
 
 * {
+
     margin: 0;
+
     padding: 0;
 
     box-sizing: border-box;
 
     font-family: 'Poppins', sans-serif;
+
 }
 
 
@@ -44,6 +47,7 @@ body {
     );
 
     color: #333;
+
 }
 
 
@@ -72,7 +76,10 @@ body {
     box-shadow:
         0 15px 40px rgba(0, 0, 0, .25);
 
-    overflow: hidden;
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
 }
 
 
@@ -111,6 +118,7 @@ body {
     z-index: 0;
 
     pointer-events: none;
+
 }
 
 
@@ -123,6 +131,7 @@ body {
     position: relative;
 
     z-index: 1;
+
 }
 
 
@@ -138,9 +147,10 @@ body {
 
     gap: 12px;
 
-    margin-bottom: 30px;
+    margin-bottom: 25px;
 
     flex-wrap: wrap;
+
 }
 
 
@@ -157,11 +167,27 @@ body {
     font-size: 1.8rem;
 
     font-weight: 700;
+
 }
 
 
 /* =========================================
-   BOTONES
+   BOTONES DE CABECERA
+   ========================================= */
+
+.botones {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+}
+
+
+/* =========================================
+   BOTONES GENERALES DE CABECERA
    ========================================= */
 
 .cabecera button {
@@ -187,6 +213,7 @@ body {
     justify-content: center;
 
     gap: 8px;
+
 }
 
 
@@ -201,6 +228,7 @@ body {
     color: #d22163;
 
     border: 2px solid #d22163;
+
 }
 
 
@@ -214,6 +242,7 @@ body {
 
     box-shadow:
         0 7px 15px rgba(210, 33, 99, .25);
+
 }
 
 
@@ -235,6 +264,7 @@ body {
 
     box-shadow:
         0 5px 12px rgba(210, 33, 99, .18);
+
 }
 
 
@@ -244,6 +274,85 @@ body {
 
     box-shadow:
         0 9px 20px rgba(210, 33, 99, .30);
+
+}
+
+
+/* =========================================
+   BUSCADOR
+   ========================================= */
+
+.buscador {
+
+    position: relative;
+
+    width: 100%;
+
+    margin-bottom: 25px;
+
+}
+
+
+.buscador i {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #d22163;
+
+    font-size: 1rem;
+
+    pointer-events: none;
+
+}
+
+
+.buscador input {
+
+    width: 100%;
+
+    padding: 13px 15px 13px 45px;
+
+    background: transparent;
+
+    border: 2px solid rgba(210, 33, 99, .30);
+
+    border-radius: 12px;
+
+    outline: none;
+
+    color: #333;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: .95rem;
+
+    transition: .3s;
+
+}
+
+
+.buscador input::placeholder {
+
+    color: #777;
+
+}
+
+
+.buscador input:focus {
+
+    background: white;
+
+    border-color: #d22163;
+
+    box-shadow:
+        0 0 0 4px rgba(210, 33, 99, .12);
+
 }
 
 
@@ -266,7 +375,9 @@ table {
     border:
         2px solid rgba(210, 33, 99, .15);
 
-    background: rgba(255, 255, 255, .35);
+    background:
+        rgba(255, 255, 255, .35);
+
 }
 
 
@@ -283,6 +394,7 @@ thead {
     );
 
     color: white;
+
 }
 
 
@@ -295,6 +407,7 @@ th {
     font-size: .88rem;
 
     font-weight: 600;
+
 }
 
 
@@ -313,7 +426,9 @@ td {
 
     font-size: .88rem;
 
-    background: rgba(255, 255, 255, .30);
+    background:
+        rgba(255, 255, 255, .30);
+
 }
 
 
@@ -324,6 +439,7 @@ td {
 tbody tr:last-child td {
 
     border-bottom: none;
+
 }
 
 
@@ -334,6 +450,7 @@ tbody tr:last-child td {
 tbody tr {
 
     transition: .25s;
+
 }
 
 
@@ -343,6 +460,7 @@ tbody tr:hover {
         rgba(210, 33, 99, .06);
 
     transform: scale(1.002);
+
 }
 
 
@@ -354,6 +472,24 @@ th:last-child,
 td:last-child {
 
     text-align: center;
+
+}
+
+
+/* =========================================
+   CONTENEDOR DE ACCIONES
+   ========================================= */
+
+.acciones {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
 }
 
 
@@ -384,6 +520,7 @@ td button {
     font-size: .95rem;
 
     transition: .25s;
+
 }
 
 
@@ -393,11 +530,14 @@ td button {
 
 .btnEditar {
 
-    background: rgba(210, 33, 99, .10);
+    background:
+        rgba(210, 33, 99, .10);
 
     color: #d22163;
 
-    border: 1px solid rgba(210, 33, 99, .20);
+    border:
+        1px solid rgba(210, 33, 99, .20);
+
 }
 
 
@@ -411,6 +551,7 @@ td button {
 
     box-shadow:
         0 5px 12px rgba(210, 33, 99, .25);
+
 }
 
 
@@ -420,11 +561,14 @@ td button {
 
 .btnEliminar {
 
-    background: rgba(220, 53, 69, .10);
+    background:
+        rgba(220, 53, 69, .10);
 
     color: #dc3545;
 
-    border: 1px solid rgba(220, 53, 69, .20);
+    border:
+        1px solid rgba(220, 53, 69, .20);
+
 }
 
 
@@ -438,6 +582,7 @@ td button {
 
     box-shadow:
         0 5px 12px rgba(220, 53, 69, .25);
+
 }
 
 
@@ -447,11 +592,14 @@ td button {
 
 .btnVer {
 
-    background: rgba(13, 110, 253, .10);
+    background:
+        rgba(13, 110, 253, .10);
 
     color: #0d6efd;
 
-    border: 1px solid rgba(13, 110, 253, .20);
+    border:
+        1px solid rgba(13, 110, 253, .20);
+
 }
 
 
@@ -462,6 +610,10 @@ td button {
     color: white;
 
     transform: translateY(-2px);
+
+    box-shadow:
+        0 5px 12px rgba(13, 110, 253, .25);
+
 }
 
 
@@ -474,11 +626,12 @@ td button i {
     font-size: 1rem;
 
     pointer-events: none;
+
 }
 
 
 /* =========================================
-   MENSAJE SIN SOCIOS
+   MENSAJES DE TABLA
    ========================================= */
 
 #tablaSocios td[colspan] {
@@ -490,16 +643,40 @@ td button i {
     color: #888;
 
     font-size: .95rem;
+
 }
 
 
-/* =========================================
-   SCROLL HORIZONTAL
-   ========================================= */
+.sin-resultados {
 
-.contenedor {
+    text-align: center;
 
-    overflow-x: auto;
+    padding: 35px !important;
+
+    color: #888;
+
+    font-size: .95rem;
+
+}
+
+
+.sin-resultados i {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d22163;
+
+    font-size: 2rem;
+
+}
+
+
+.sin-resultados span {
+
+    display: block;
+
 }
 
 
@@ -512,12 +689,14 @@ td button i {
     body {
 
         padding: 15px;
+
     }
 
 
     .contenedor {
 
         padding: 25px 18px;
+
     }
 
 
@@ -526,6 +705,7 @@ td button i {
         flex-direction: column;
 
         align-items: stretch;
+
     }
 
 
@@ -535,19 +715,40 @@ td button i {
 
         margin-right: 0;
 
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+
+    }
+
+
+    .botones {
+
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 8px;
+
     }
 
 
     .cabecera button {
 
         width: 100%;
+
+    }
+
+
+    .buscador {
+
+        margin-bottom: 20px;
+
     }
 
 
     table {
 
         min-width: 700px;
+
     }
 
 }
@@ -564,12 +765,31 @@ td button i {
         padding: 20px 15px;
 
         border-radius: 16px;
+
     }
 
 
     .cabecera h1 {
 
         font-size: 1.45rem;
+
+    }
+
+
+    .buscador input {
+
+        font-size: .85rem;
+
+        padding:
+            12px 12px 12px 42px;
+
+    }
+
+
+    .buscador i {
+
+        left: 14px;
+
     }
 
 
@@ -579,6 +799,7 @@ td button i {
         padding: 11px;
 
         font-size: .8rem;
+
     }
 
 
@@ -587,6 +808,16 @@ td button i {
         width: 34px;
 
         height: 34px;
+
+    }
+
+
+    .contenedor::before {
+
+        width: 450px;
+
+        height: 450px;
+
     }
 
 }
